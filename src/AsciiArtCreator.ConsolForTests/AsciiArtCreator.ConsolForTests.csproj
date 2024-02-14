@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AsciiArtCreator.SystemDrawing.Framework\AsciiArtCreator.SystemDrawing.Framework.csproj">
+      <Project>{6bbec6f5-f6bd-47fd-afc7-9a044cd4f456}</Project>
+      <Name>AsciiArtCreator.SystemDrawing.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
