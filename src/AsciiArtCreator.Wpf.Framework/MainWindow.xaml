@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Image Source="{Binding ImagePath}" />
+        <Button Command="{Binding SelectFileCommand}" Content="Select File" Grid.Column="1"/>
     </Grid>
 </Window>
