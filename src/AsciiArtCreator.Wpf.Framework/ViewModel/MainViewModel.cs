@@ -14,6 +14,7 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
     {
         private string imagePath = null;
         private RelayCommand selectFileCommand;
+        private int scale = 100;
 
         public string ImagePath
         {
@@ -45,7 +46,15 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
             }));
         }
         public event PropertyChangedEventHandler PropertyChanged;
-
+        public float Scale
+        {
+            get => scale / 100f;
+            set
+            {
+                scale = (int)(value * 100f);
+                OnPropertyChanged("Scale");
+            }
+        }
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         { 
            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
