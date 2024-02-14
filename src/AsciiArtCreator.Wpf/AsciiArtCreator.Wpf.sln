@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsciiArtCreator.Base.Framew
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsciiArtCreator.SystemDrawing.Framework", "..\AsciiArtCreator.SystemDrawing.Framework\AsciiArtCreator.SystemDrawing.Framework.csproj", "{6BBEC6F5-F6BD-47FD-AFC7-9A044CD4F456}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsciiArtCreator.ConsolForTests", "..\AsciiArtCreator.ConsolForTests\AsciiArtCreator.ConsolForTests.csproj", "{D07E0EF1-3AF0-4814-8BB2-0281EF0DDF80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6BBEC6F5-F6BD-47FD-AFC7-9A044CD4F456}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BBEC6F5-F6BD-47FD-AFC7-9A044CD4F456}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BBEC6F5-F6BD-47FD-AFC7-9A044CD4F456}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D07E0EF1-3AF0-4814-8BB2-0281EF0DDF80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D07E0EF1-3AF0-4814-8BB2-0281EF0DDF80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D07E0EF1-3AF0-4814-8BB2-0281EF0DDF80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D07E0EF1-3AF0-4814-8BB2-0281EF0DDF80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
