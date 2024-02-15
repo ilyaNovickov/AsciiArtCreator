@@ -7,6 +7,14 @@
         xmlns:Fluent="urn:fluent-ribbon"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <BitmapImage x:Key="DefaultImage" UriSource="Assests/about.png"/>
+        <!--<FontFamily x:Key="DefaultFont">
+            <FontFamily.FamilyNames>
+                Consolas
+            </FontFamily.FamilyNames>
+        </FontFamily>-->
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -30,6 +38,7 @@
                     <Fluent:RibbonToolBar Header="asd">
                         <Fluent:ComboBox x:Name="fontComboBox" 
                                          ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" 
+                                         SelectedValue="Consolas" 
                                          IsReadOnly="True" 
                                          MinWidth="100"/>
                         <Button Content=" asd" Command="{Binding SelectFileCommand}"/>
@@ -45,19 +54,22 @@
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0">
                 <StatusBar DockPanel.Dock="Bottom">
-                    <Slider Minimum="0.02" Maximum="1" MinWidth="100" Value="{Binding Scale}"/>
-                    
+                    <Slider Minimum="0.02" Maximum="10" MinWidth="100" Value="{Binding Scale}"/>
                     <ComboBox/>
                 </StatusBar>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto">
-                    <Image Stretch="None" Source="{Binding ImagePath}" Grid.Column="0">
+                    <Image Stretch="None" Source="{Binding ImagePath, TargetNullValue={StaticResource DefaultImage}}" Grid.Column="0">
                         <Image.LayoutTransform>
                             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
                         </Image.LayoutTransform>
                     </Image>
                 </ScrollViewer>
             </DockPanel>
-            <RichTextBox FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Grid.Column="1"/>
+            <RichTextBox FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                         IsReadOnly="False" 
+                         
+                         Grid.Column="1"/>
+
         </Grid>
     </Grid>
 </Window>

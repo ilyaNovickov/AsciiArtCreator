@@ -120,5 +120,13 @@
   <ItemGroup>
     <Folder Include="View\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assests\about.png" />
+    <Resource Include="Assests\copy.png" />
+    <Resource Include="Assests\open.png" />
+    <Resource Include="Assests\save.png" />
+    <Resource Include="Assests\start.png" />
+    <Resource Include="Assests\stopRed.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -25,6 +25,8 @@ namespace AsciiArtCreator.Wpf.Framework
         {
             InitializeComponent();
 
+            //Fonts.SystemFontFamilies.Contains(new FontFamily("Terminal"));
+
             DataContext = new MainViewModel();
         }
     }
