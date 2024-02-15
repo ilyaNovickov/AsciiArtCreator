@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AsciiArtCreator.Wpf.Framework"
         xmlns:Fluent="urn:fluent-ribbon"
+        xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
@@ -54,8 +56,21 @@
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0">
                 <StatusBar DockPanel.Dock="Bottom">
-                    <Slider Minimum="0.02" Maximum="10" MinWidth="100" Value="{Binding Scale}"/>
+                    <Slider x:Name="slider" Minimum="0.02" Maximum="10" MinWidth="100" Value="{Binding Scale}">
+                        <behaviors:Interaction.Triggers>
+                            <behaviors:EventTrigger EventName="ValueChange">
+                                <behaviors:InvokeCommandAction/>
+                            </behaviors:EventTrigger>
+                        </behaviors:Interaction.Triggers>
+                    </Slider>
                     <ComboBox/>
+                    <toolkit:SplitButton 
+                        Content="{Binding Path=Scale}"
+                        ContentStringFormat="{}{0:P}">
+                        <toolkit:SplitButton.DropDownContent>
+                            <Button>sad</Button>
+                        </toolkit:SplitButton.DropDownContent>
+                    </toolkit:SplitButton>
                 </StatusBar>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto">
                     <Image Stretch="None" Source="{Binding ImagePath, TargetNullValue={StaticResource DefaultImage}}" Grid.Column="0">
