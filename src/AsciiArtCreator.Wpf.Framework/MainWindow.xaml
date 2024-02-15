@@ -22,7 +22,6 @@
         </Grid.RowDefinitions>
 
         <Fluent:Ribbon Grid.Row="0">
-            <!--Tabs-->
             <Fluent:RibbonTabItem Header="Основное">
                 <Fluent:RibbonGroupBox>
                     
@@ -46,6 +45,7 @@
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
         </Fluent:Ribbon>
+
         <!--Основная панель-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -68,8 +68,9 @@
             <RichTextBox FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                          IsReadOnly="False" 
                          
-                         Grid.Column="1"/>
+                         Grid.Column="1">
 
+            </RichTextBox>
         </Grid>
     </Grid>
 </Window>
