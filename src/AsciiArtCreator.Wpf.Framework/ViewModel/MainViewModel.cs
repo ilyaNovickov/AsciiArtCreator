@@ -14,6 +14,7 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
     {
         private string imagePath = null;
         private RelayCommand selectFileCommand;
+        private ActionCommand<int> scaleChangeCommand;
         //private RelayCommand selectFontCommand;
         private float scale = 1f;
 
@@ -44,6 +45,14 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
                 {
                     ImagePath = openFileDialog.FileName;
                 }
+            }));
+        }
+
+        public ActionCommand<int> ScaleChangeCommand
+        {
+            get => scaleChangeCommand ?? (scaleChangeCommand = new ActionCommand<int>((value) =>
+            {
+                return;
             }));
         }
 
