@@ -14,7 +14,8 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
     {
         private string imagePath = null;
         private RelayCommand selectFileCommand;
-        private int scale = 100;
+        //private RelayCommand selectFontCommand;
+        private float scale = 1f;
 
         public string ImagePath
         {
@@ -45,13 +46,31 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
                 }
             }));
         }
+
+        //public RelayCommand SelectFontCommand
+        //{
+        //    get => selectFontCommand ?? (selectFontCommand = new RelayCommand((_) =>
+        //    {
+        //        Microsoft.Win32.Fo openFileDialog = new Microsoft.Win32.OpenFileDialog();
+
+        //        openFileDialog.Filter = "Image files (*.png, *.jpeg, *.jpg, *.bmp)|*.png;*.jpeg;*.jpg;*.bmp";
+
+        //        bool? ok = openFileDialog.ShowDialog();
+
+        //        if (ok.HasValue && ok.Value)
+        //        {
+        //            ImagePath = openFileDialog.FileName;
+        //        }
+        //    }));
+        //}
+
         public event PropertyChangedEventHandler PropertyChanged;
         public float Scale
         {
-            get => scale / 100f;
+            get => scale;
             set
             {
-                scale = (int)(value * 100f);
+                scale = value;
                 OnPropertyChanged("Scale");
             }
         }

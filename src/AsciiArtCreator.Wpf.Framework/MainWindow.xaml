@@ -28,7 +28,10 @@
                     <Fluent:Button Header="Стоп"/>
                     <Fluent:SeparatorTabItem/>
                     <Fluent:RibbonToolBar Header="asd">
-                        <Fluent:ComboBox ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" IsReadOnly="True" MinWidth="100"/>
+                        <Fluent:ComboBox x:Name="fontComboBox" 
+                                         ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" 
+                                         IsReadOnly="True" 
+                                         MinWidth="100"/>
                         <Button Content=" asd" Command="{Binding SelectFileCommand}"/>
                     </Fluent:RibbonToolBar>
                 </Fluent:RibbonGroupBox>
@@ -40,9 +43,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <DockPanel>
+            <DockPanel Grid.Column="0">
                 <StatusBar DockPanel.Dock="Bottom">
                     <Slider Minimum="0.02" Maximum="1" MinWidth="100" Value="{Binding Scale}"/>
+                    
                     <ComboBox/>
                 </StatusBar>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto">
@@ -53,6 +57,7 @@
                     </Image>
                 </ScrollViewer>
             </DockPanel>
+            <RichTextBox FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Grid.Column="1"/>
         </Grid>
     </Grid>
 </Window>
