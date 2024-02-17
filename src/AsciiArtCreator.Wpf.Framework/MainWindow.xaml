@@ -35,13 +35,13 @@
                 </MenuItem>
                 <MenuItem Header="Экспорт" Command="{Binding ExportCommand}"/>
                 <Separator/>
-                <MenuItem Header="Копировать" Click="MenuItem_Click">
+                <MenuItem Header="Копировать" Click="Copy_Click">
                     <MenuItem.Icon>
                         <Image Source="Assests/copy.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="Выход" Click="MenuItem_Click_1"/>
+                <MenuItem Header="Выход" Click="Exit_Click"/>
             </MenuItem>
             <MenuItem HorizontalContentAlignment="Right" HorizontalAlignment="Right" Header="asd"/>
             <Button>asdw</Button>
@@ -103,17 +103,27 @@ ContentStringFormat="{}{0:P}">
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
-            <Fluent:Ribbon Grid.Row="0"  >
 
+            <Fluent:Ribbon Grid.Row="0" CanCustomizeQuickAccessToolBarItems="False">
+                <!--Основная панель-->
                 <Fluent:RibbonTabItem Header="Основное">
-                    
+                    <!--Панель с основными предметами-->
                     <Fluent:RibbonGroupBox>
-
-                        <Fluent:Button Header="Выбрать" SizeDefinition="middle" Command="{Binding SelectFileCommand}"/>
-                        <Fluent:Button Header="Сохранить" SizeDefinition="middle"/>
-                        <Fluent:Button Header="Экспорт" SizeDefinition="middle"/>
-                        <Fluent:Button Header="Копировать" SizeDefinition="middle"/>
+                        <Fluent:Button Header="Выбрать" 
+                                       SizeDefinition="middle" 
+                                       Icon="pack://application:,,,/Assests/open.png"
+                                       Command="{Binding SelectFileCommand}"/>
+                        <Fluent:Button Header="Сохранить" 
+                                       SizeDefinition="middle"
+                                       Icon="pack://application:,,,/Assests/save.png"
+                                       Command="{Binding SaveCommand}"/>
+                        <Fluent:Button Header="Экспорт" 
+                                       SizeDefinition="middle"
+                                       Command="{Binding ExportCommand}"/>
+                        <Fluent:Button Header="Копировать" 
+                                       SizeDefinition="large"
+                                       Icon="pack://application:,,,/Assests/copy.png"
+                                       Click="Copy_Click"/>
                     </Fluent:RibbonGroupBox>
                     <Fluent:RibbonGroupBox Header="Преобразование">
                         <Fluent:Button Header="Старт"/>
@@ -129,6 +139,7 @@ ContentStringFormat="{}{0:P}">
                         </Fluent:RibbonToolBar>
                     </Fluent:RibbonGroupBox>
                 </Fluent:RibbonTabItem>
+                
             </Fluent:Ribbon>
 
             <!--Основная панель-->
