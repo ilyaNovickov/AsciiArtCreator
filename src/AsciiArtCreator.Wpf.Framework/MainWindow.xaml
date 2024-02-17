@@ -28,12 +28,20 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="Сохранить">
-                    
+                <MenuItem Header="Сохранить" Command="{Binding SaveCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="Assests/save.png"/>
+                    </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Экспорт"/>
+                <MenuItem Header="Экспорт" Command="{Binding ExportCommand}"/>
                 <Separator/>
-                <MenuItem Header="Выход"/>
+                <MenuItem Header="Копировать" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Assests/copy.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Выход" Click="MenuItem_Click_1"/>
             </MenuItem>
             <MenuItem HorizontalContentAlignment="Right" HorizontalAlignment="Right" Header="asd"/>
             <Button>asdw</Button>
@@ -139,7 +147,8 @@ ContentStringFormat="{}{0:P}">
                     </Image>
                 </ScrollViewer>
                 <!--Текстовый блок-->
-                <toolkit:RichTextBox Grid.Column="1"
+                <toolkit:RichTextBox x:Name="richTextBox"
+                                Grid.Column="1"
                              Text="{Binding OutputArt}"
                              HorizontalScrollBarVisibility="Auto"
                              VerticalScrollBarVisibility="Auto"

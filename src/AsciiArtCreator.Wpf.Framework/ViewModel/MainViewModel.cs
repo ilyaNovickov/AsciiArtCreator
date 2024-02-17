@@ -14,6 +14,9 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
     {
         private string imagePath = null;
         private RelayCommand selectFileCommand;
+        private RelayCommand saveCommand;
+        private RelayCommand exportCommand;
+        //private RelayCommand copyCommand;
         //private ActionCommand<float> scaleChangeCommand;
         //private RelayCommand selectFontCommand;
         private float minScale = 0.02f;
@@ -51,6 +54,30 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
                 }
             }));
         }
+
+        public RelayCommand ExportCommand
+        {
+            get => exportCommand ?? (exportCommand = new RelayCommand((_) =>
+            {
+                return;
+            }));
+        }
+
+        public RelayCommand SaveCommand
+        {
+            get => saveCommand ?? (saveCommand = new RelayCommand((_) =>
+            {
+                return;
+            }));
+        }
+
+        //public RelayCommand CopyCommand
+        //{
+        //    get => saveCommand ?? (saveCommand = new RelayCommand((_) =>
+        //    {
+        //        return;
+        //    }));
+        //}
 
         //public ActionCommand<float> ScaleChangeCommand
         //{

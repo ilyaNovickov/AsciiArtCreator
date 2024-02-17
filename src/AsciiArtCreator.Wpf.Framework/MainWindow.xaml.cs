@@ -67,5 +67,15 @@ namespace AsciiArtCreator.Wpf.Framework
 
             slider.Value = Math.Log((viewModel.Scale - a) / b) / c; 
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.richTextBox.Copy();
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
