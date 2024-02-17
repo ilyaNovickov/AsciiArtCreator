@@ -104,7 +104,7 @@ ContentStringFormat="{}{0:P}">
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Fluent:Ribbon Grid.Row="0" CanCustomizeQuickAccessToolBarItems="False">
+            <Fluent:Ribbon Grid.Row="0" CanCustomizeQuickAccessToolBarItems="False" CanQuickAccessLocationChanging="False">
                 <!--Основная панель-->
                 <Fluent:RibbonTabItem Header="Основное">
                     <!--Панель с основными предметами-->
@@ -125,17 +125,24 @@ ContentStringFormat="{}{0:P}">
                                        Icon="pack://application:,,,/Assests/copy.png"
                                        Click="Copy_Click"/>
                     </Fluent:RibbonGroupBox>
+                    <!--Панел преобразования-->
                     <Fluent:RibbonGroupBox Header="Преобразование">
-                        <Fluent:Button Header="Старт"/>
-                        <Fluent:Button Header="Стоп"/>
-                        <Fluent:SeparatorTabItem/>
-                        <Fluent:RibbonToolBar Header="asd">
-                            <Fluent:ComboBox x:Name="fontComboBox" 
-                                     ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" 
-                                     SelectedValue="Consolas" 
-                                     IsReadOnly="True" 
-                                     MinWidth="100"/>
-                            <Button Content=" asd" Command="{Binding SelectFileCommand}"/>
+                        <Fluent:Button Header="Старт" 
+                                       Icon="pack://application:,,,/Assests/start.png"
+                                       Command="{Binding GetArtCommand}"/>
+                        <Fluent:Button Header="Стоп" 
+                                       Icon="pack://application:,,,/Assests/stopRed.png"
+                                       Command="{Binding StopCommand}"/>
+                        <Fluent:RibbonToolBar>
+                            <StackPanel Orientation="Horizontal">
+                                <Fluent:ComboBox x:Name="fontComboBox" 
+                                                    ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" 
+                                                     SelectedValue="Consolas" 
+                                                     IsReadOnly="True" 
+                                                     MinWidth="100"/>
+                                <toolkit:IntegerUpDown x:Name="intUpDown" Value="{Binding ElementName=richTextBox, Path=FontSize}" Minimum="1" Maximum="36"/>
+                            </StackPanel>
+                            
                         </Fluent:RibbonToolBar>
                     </Fluent:RibbonGroupBox>
                 </Fluent:RibbonTabItem>
@@ -160,19 +167,16 @@ ContentStringFormat="{}{0:P}">
                 <!--Текстовый блок-->
                 <toolkit:RichTextBox x:Name="richTextBox"
                                 Grid.Column="1"
-                             Text="{Binding OutputArt}"
-                             HorizontalScrollBarVisibility="Auto"
-                             VerticalScrollBarVisibility="Auto"
-                             IsReadOnly="False"
-                             FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <!--<RichTextBox HorizontalScrollBarVisibility="Auto"
-                     VerticalScrollBarVisibility="Auto" 
-                     Document="{Binding OutputArt}"
-                     FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                     IsReadOnly="False" 
-                     
-                     Grid.Column="1">
-        </RichTextBox>-->
+                             HorizontalScrollBarVisibility="Visible"
+                             VerticalScrollBarVisibility="Visible"
+                             IsReadOnly="False">
+                    <FlowDocument PageWidth="1000000" 
+                                  FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                        <Paragraph >
+                            <Run Text="{Binding OutputArt}"/>
+                        </Paragraph>
+                    </FlowDocument>
+                </toolkit:RichTextBox>
             </Grid>
         </Grid>
     </DockPanel>

@@ -16,6 +16,8 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         private RelayCommand selectFileCommand;
         private RelayCommand saveCommand;
         private RelayCommand exportCommand;
+        private RelayCommand getArtCommand;
+        private RelayCommand stopCommand;
         //private RelayCommand copyCommand;
         //private ActionCommand<float> scaleChangeCommand;
         //private RelayCommand selectFontCommand;
@@ -66,6 +68,22 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         public RelayCommand SaveCommand
         {
             get => saveCommand ?? (saveCommand = new RelayCommand((_) =>
+            {
+                return;
+            }));
+        }
+
+        public RelayCommand GetArtCommand
+        {
+            get => getArtCommand ?? (getArtCommand = new RelayCommand((_) =>
+            {
+                return;
+            }));
+        }
+
+        public RelayCommand StopCommand
+        {
+            get => stopCommand ?? (stopCommand = new RelayCommand((_) =>
             {
                 return;
             }));
