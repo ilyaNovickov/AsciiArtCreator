@@ -7,6 +7,7 @@
         xmlns:Fluent="urn:fluent-ribbon"
         xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:s="clr-namespace:System;assembly=System"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
@@ -17,76 +18,142 @@
             </FontFamily.FamilyNames>
         </FontFamily>-->
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <Fluent:Ribbon Grid.Row="0">
-            <Fluent:RibbonTabItem Header="Основное">
-                <Fluent:RibbonGroupBox>
+    <DockPanel>
+        <!--Меню-->
+        <Menu Grid.Row="0" DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Открыть" Command="{Binding SelectFileCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="Assests/open.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Сохранить">
                     
-                    <Fluent:Button Header="Выбрать" SizeDefinition="middle" Command="{Binding SelectFileCommand}"/>
-                    <Fluent:Button Header="Сохранить" SizeDefinition="middle"/>
-                    <Fluent:Button Header="Экспорт" SizeDefinition="middle"/>
-                    <Fluent:Button Header="Копировать" SizeDefinition="middle"/>
-                </Fluent:RibbonGroupBox>
-                <Fluent:RibbonGroupBox Header="Преобразование">
-                    <Fluent:Button Header="Старт"/>
-                    <Fluent:Button Header="Стоп"/>
-                    <Fluent:SeparatorTabItem/>
-                    <Fluent:RibbonToolBar Header="asd">
-                        <Fluent:ComboBox x:Name="fontComboBox" 
-                                         ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" 
-                                         SelectedValue="Consolas" 
-                                         IsReadOnly="True" 
-                                         MinWidth="100"/>
-                        <Button Content=" asd" Command="{Binding SelectFileCommand}"/>
-                    </Fluent:RibbonToolBar>
-                </Fluent:RibbonGroupBox>
-            </Fluent:RibbonTabItem>
-        </Fluent:Ribbon>
-
-        <!--Основная панель-->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <DockPanel Grid.Column="0">
-                <StatusBar DockPanel.Dock="Bottom">
-                    <TextBlock Text="{}{@1+1"/>
-                    <Slider x:Name="slider" Minimum="0.02" Maximum="10" MinWidth="100" Value="{Binding Scale}">
+                </MenuItem>
+                <MenuItem Header="Экспорт"/>
+                <Separator/>
+                <MenuItem Header="Выход"/>
+            </MenuItem>
+            <MenuItem HorizontalContentAlignment="Right" HorizontalAlignment="Right" Header="asd"/>
+            <Button>asdw</Button>
+        </Menu>
+        <!--Строка состояния-->
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <!--Бегунок для маштаба-->
+                    <Slider Grid.Column="0"
+                        x:Name="slider" 
+    Minimum="0" 
+    Maximum="1" 
+    MinWidth="100" 
+    Value="0.5" 
+    ValueChanged="slider_ValueChanged"
+    TickPlacement="BottomRight">
                         <behaviors:Interaction.Triggers>
                             <behaviors:EventTrigger EventName="ValueChanged">
                                 <behaviors:InvokeCommandAction/>
                             </behaviors:EventTrigger>
                         </behaviors:Interaction.Triggers>
                     </Slider>
-                    <ComboBox/>
-                    <toolkit:SplitButton 
-                        Content="{Binding Path=Scale}"
-                        ContentStringFormat="{}{0:P}">
+                    <!--Конпка для изменения маштаба-->
+                    <toolkit:SplitButton Grid.Column="1"
+Content="{Binding Path=Scale}"
+ContentStringFormat="{}{0:P}">
                         <toolkit:SplitButton.DropDownContent>
-                            <Button>sad</Button>
+                            <StackPanel>
+                                <Button Content="2%" Click="Button_Click"/>
+                                <Button Content="50%" Click="Button_Click"/>
+                                <Button Content="100%" Click="Button_Click"/>
+                                <Button Content="500%" Click="Button_Click"/>
+                                <Button Content="1000%" Click="Button_Click"/>
+                            </StackPanel>
                         </toolkit:SplitButton.DropDownContent>
                     </toolkit:SplitButton>
-                </StatusBar>
-                <ScrollViewer HorizontalScrollBarVisibility="Auto">
-                    <Image Stretch="None" Source="{Binding ImagePath, TargetNullValue={StaticResource DefaultImage}}" Grid.Column="0">
+                </Grid>
+                
+            </StatusBarItem>
+            
+        </StatusBar>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <Fluent:Ribbon Grid.Row="0"  >
+
+                <Fluent:RibbonTabItem Header="Основное">
+                    
+                    <Fluent:RibbonGroupBox>
+
+                        <Fluent:Button Header="Выбрать" SizeDefinition="middle" Command="{Binding SelectFileCommand}"/>
+                        <Fluent:Button Header="Сохранить" SizeDefinition="middle"/>
+                        <Fluent:Button Header="Экспорт" SizeDefinition="middle"/>
+                        <Fluent:Button Header="Копировать" SizeDefinition="middle"/>
+                    </Fluent:RibbonGroupBox>
+                    <Fluent:RibbonGroupBox Header="Преобразование">
+                        <Fluent:Button Header="Старт"/>
+                        <Fluent:Button Header="Стоп"/>
+                        <Fluent:SeparatorTabItem/>
+                        <Fluent:RibbonToolBar Header="asd">
+                            <Fluent:ComboBox x:Name="fontComboBox" 
+                                     ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" 
+                                     SelectedValue="Consolas" 
+                                     IsReadOnly="True" 
+                                     MinWidth="100"/>
+                            <Button Content=" asd" Command="{Binding SelectFileCommand}"/>
+                        </Fluent:RibbonToolBar>
+                    </Fluent:RibbonGroupBox>
+                </Fluent:RibbonTabItem>
+            </Fluent:Ribbon>
+
+            <!--Основная панель-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!--Изображение-->
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" Background="Gray" Grid.Column="0">
+                    <Image x:Name="image" Stretch="None" Source="{Binding ImagePath, TargetNullValue={StaticResource DefaultImage}}" Grid.Column="0">
                         <Image.LayoutTransform>
                             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
                         </Image.LayoutTransform>
                     </Image>
                 </ScrollViewer>
-            </DockPanel>
-            <RichTextBox FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                         IsReadOnly="False" 
-                         
-                         Grid.Column="1">
-
-            </RichTextBox>
+                <!--Текстовый блок-->
+                <toolkit:RichTextBox Grid.Column="1"
+                             Text="{Binding OutputArt}"
+                             HorizontalScrollBarVisibility="Auto"
+                             VerticalScrollBarVisibility="Auto"
+                             IsReadOnly="False"
+                             FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <!--<RichTextBox HorizontalScrollBarVisibility="Auto"
+                     VerticalScrollBarVisibility="Auto" 
+                     Document="{Binding OutputArt}"
+                     FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                     IsReadOnly="False" 
+                     
+                     Grid.Column="1">
+        </RichTextBox>-->
+            </Grid>
         </Grid>
-    </Grid>
+    </DockPanel>
 </Window>

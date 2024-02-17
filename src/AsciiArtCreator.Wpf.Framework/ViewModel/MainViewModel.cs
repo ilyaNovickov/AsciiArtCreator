@@ -14,9 +14,13 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
     {
         private string imagePath = null;
         private RelayCommand selectFileCommand;
-        private ActionCommand<int> scaleChangeCommand;
+        //private ActionCommand<float> scaleChangeCommand;
         //private RelayCommand selectFontCommand;
+        private float minScale = 0.02f;
+        private float maxScale = 10.0f;
         private float scale = 1f;
+
+        private string art = "";//"{\\rtf1\\ansi\\ansicpg1252\\uc1\\htmautsp\\deff2{\\fonttbl{\\f0\\fcharset0 Times New Roman;}{\\f2\\fcharset0 Segoe UI;}}{\\colortbl\\red0\\green0\\blue0;\\red255\\green255\\blue255;}\\loch\\hich\\dbch\\pard\\plain\\ltrpar\\itap0{\\lang1033\\fs18\\f2\\cf0 \\cf0\\ql{\\f2 {\\ltrch This is the }{\\b\\ltrch RichTextBox}\\li0\\ri0\\sa0\\sb0\\fi0\\ql\\par}}}";
 
         public string ImagePath
         {
@@ -48,13 +52,13 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
             }));
         }
 
-        public ActionCommand<int> ScaleChangeCommand
-        {
-            get => scaleChangeCommand ?? (scaleChangeCommand = new ActionCommand<int>((value) =>
-            {
-                return;
-            }));
-        }
+        //public ActionCommand<float> ScaleChangeCommand
+        //{
+        //    get => scaleChangeCommand ?? (scaleChangeCommand = new ActionCommand<float>((value) =>
+        //    {
+        //        Scale = value;
+        //    }));
+        //}
 
         //public RelayCommand SelectFontCommand
         //{
@@ -74,14 +78,47 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         //}
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public float MinScale
+        {
+            get => minScale;
+            set
+            {
+                if (value <= 0 && value > maxScale)
+                    throw new Exception("Минимальное значение не может быть ниже 0 или больше максимального");
+                minScale = value;
+                OnPropertyChanged("MinScale");
+            }
+        }
+
+        public float MaxScale
+        {
+            get => maxScale;
+            set
+            {
+                if (value <= 0 && value < minScale)
+                    throw new Exception("Минимальное значение не может быть ниже 0 или меньше минимального");
+                maxScale = value;
+                OnPropertyChanged("MaxScale");
+            }
+        }
+
         public float Scale
         {
             get => scale;
             set
             {
+                if (value < minScale && value > maxScale)
+                    throw new Exception("Маштаб должен быть в интервале от Min до Max");
                 scale = value;
                 OnPropertyChanged("Scale");
             }
+        }
+
+        public string OutputArt
+        {
+            get => art;
+            set => art = value;
         }
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         { 
