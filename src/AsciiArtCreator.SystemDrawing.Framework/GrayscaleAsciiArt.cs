@@ -18,6 +18,8 @@ namespace AsciiArtCreator.SystemDrawing.Framework
             {
                 width = 500;
                 height = 500;
+                maxHeight = 5000;
+                maxWidth = 5000;
                 minHeight = 4;
                 minWidth = 2;
                 InverseColors = false;
@@ -27,14 +29,17 @@ namespace AsciiArtCreator.SystemDrawing.Framework
             private int height;
             private int minWidth;
             private int minHeight;
+            private int maxWidth;
+            private int maxHeight;
 
             public int MinWidth
             {
                 get => minWidth;
                 set
                 {
-                    if (value <= 0)
-                        throw new Exception("Minimum value can't be below zero");
+                    if (value <= 0 && value > maxWidth)
+                        throw new Exception("Минимальное значение не может быть меньше 0 " +
+                            "или больше максимального значения");
                     minWidth = value;
                 }
             }
@@ -44,9 +49,32 @@ namespace AsciiArtCreator.SystemDrawing.Framework
                 get => minHeight;
                 set
                 {
-                    if (value <= 0)
-                        throw new Exception("Minimum value can't be below zero");
+                    if (value <= 0 && value > maxHeight)
+                        throw new Exception("Минимальное значение не может быть меньше 0 " +
+                            "или больше максимального значения");
                     minHeight = value;
+                }
+            }
+
+            public int MaxWidth
+            {
+                get => maxWidth;
+                set
+                {
+                    if (value <= 0 && value < minWidth)
+                        throw new Exception("Максимальное значение не может быть меньше 0 или минимального значения");
+                    maxWidth = value;
+                }
+            }
+
+            public int MaxHeight
+            {
+                get => maxHeight;
+                set
+                {
+                    if (value <= 0 && value < minHeight)
+                        throw new Exception("Максимальное значение не может быть меньше 0 или минимального значения");
+                    maxHeight = value;
                 }
             }
 
