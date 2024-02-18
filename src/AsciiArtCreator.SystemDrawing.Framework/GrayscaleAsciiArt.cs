@@ -10,7 +10,7 @@ using System.Drawing.Imaging;
 
 namespace AsciiArtCreator.SystemDrawing.Framework
 {
-    public class GrayscaleAsciiArt
+    public class GrayscaleAsciiArt : IDisposable
     {
         public class GrayscaleArtOptions
         {
@@ -199,6 +199,11 @@ namespace AsciiArtCreator.SystemDrawing.Framework
             {
                 return format.Func.Invoke((Bitmap)Image, format.SymbolCollection, options, token, progress);
             });
+        }
+
+        public void Dispose()
+        {
+            Image?.Dispose();
         }
 
         //public void GetOrCreateAsciiArt()
