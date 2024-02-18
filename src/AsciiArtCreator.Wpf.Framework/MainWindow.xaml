@@ -44,7 +44,6 @@
                 <MenuItem Header="Выход" Click="Exit_Click"/>
             </MenuItem>
             <MenuItem HorizontalContentAlignment="Right" HorizontalAlignment="Right" Header="asd"/>
-            <Button>asdw</Button>
         </Menu>
         <!--Строка состояния-->
         <StatusBar DockPanel.Dock="Bottom">
@@ -104,7 +103,10 @@ ContentStringFormat="{}{0:P}">
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <!--Ленточная панель-->
-            <Fluent:Ribbon Grid.Row="0" CanCustomizeQuickAccessToolBarItems="False" CanQuickAccessLocationChanging="False">
+            <Fluent:Ribbon Grid.Row="0" 
+                           CanCustomizeQuickAccessToolBarItems="False" 
+                           CanQuickAccessLocationChanging="False"
+                           Resources="{StaticResource asda}">
                 <!--Основная панель-->
                 <Fluent:RibbonTabItem Header="Основное">
                     <!--Панель с основными предметами-->

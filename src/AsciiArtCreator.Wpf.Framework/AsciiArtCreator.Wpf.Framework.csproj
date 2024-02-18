@@ -87,6 +87,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\ActionCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Helpers\FontHelper.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +120,26 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Assests\Fonts\Anonymous_Pro.ttf" />
+    <Resource Include="Assests\Fonts\Anonymous_Pro_B.ttf" />
+    <Resource Include="Assests\Fonts\Anonymous_Pro_BI.ttf" />
+    <Resource Include="Assests\Fonts\Anonymous_Pro_I.ttf" />
+    <Resource Include="Assests\Fonts\CodenameCoderFree4F-Bold.otf" />
+    <Resource Include="Assests\Fonts\CodenameCoderFree4F-Bold.ttf" />
+    <Resource Include="Assests\Fonts\Cousine-Bold.ttf" />
+    <Resource Include="Assests\Fonts\Cousine-BoldItalic.ttf" />
+    <Resource Include="Assests\Fonts\Cousine-Italic.ttf" />
+    <Resource Include="Assests\Fonts\Cousine-Regular.ttf" />
+    <Resource Include="Assests\Fonts\DroidSansMonoSlashed.ttf" />
+    <Resource Include="Assests\Fonts\FiraMono-Bold.ttf" />
+    <Resource Include="Assests\Fonts\FiraMono-Medium.ttf" />
+    <Resource Include="Assests\Fonts\FiraMono-Regular.ttf" />
+    <Resource Include="Assests\Fonts\OpenGostTypeA-Regular.ttf" />
+    <Resource Include="Assests\Fonts\RubikMonoOne-Regular.ttf" />
+    <Resource Include="Assests\Fonts\VinMonoPro-Light.otf" />
+    <Resource Include="Assests\Fonts\VinMonoPro-Light.ttf" />
+    <Resource Include="Assests\Fonts\VinMonoPro-LightItalic.otf" />
+    <Resource Include="Assests\Fonts\VinMonoPro-LightItalic.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

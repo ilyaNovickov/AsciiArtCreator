@@ -29,6 +29,9 @@ namespace AsciiArtCreator.Wpf.Framework
             InitializeComponent();
             viewModel = new MainViewModel();
             DataContext = viewModel;
+
+
+            richTextBox.Document.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Assests/Fonts/#Anonymous pro");
         }
         private double a => (viewModel.MinScale * viewModel.MaxScale - Math.Pow(1d, 2d)) / (viewModel.MinScale - 2d * 1d + viewModel.MaxScale);
         private double b => Math.Pow((1d - viewModel.MinScale), 2d) / (viewModel.MinScale - 2d * 1d + viewModel.MaxScale);
