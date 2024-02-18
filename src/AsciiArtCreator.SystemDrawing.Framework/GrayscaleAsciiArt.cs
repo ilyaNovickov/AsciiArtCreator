@@ -96,6 +96,9 @@ namespace AsciiArtCreator.SystemDrawing.Framework
                 throw new Exception("Такого файла не существует");
 
             this.Image = Image.FromFile(path);
+
+            //options.Width = Image.Width;
+            //options.Height = Image.Height;
         }
 
         public Image Image

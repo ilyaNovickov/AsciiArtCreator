@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using AsciiArtCreator.Wpf.Framework.Commands;
+using AsciiArtCreator.SystemDrawing.Framework;
 
 namespace AsciiArtCreator.Wpf.Framework.ViewModel
 {
@@ -77,6 +78,10 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         {
             get => getArtCommand ?? (getArtCommand = new RelayCommand((_) =>
             {
+                GrayscaleAsciiArt asciiArt = new GrayscaleAsciiArt(ImagePath);
+
+                OutputArt = asciiArt.GetOrCreateAsciiArt();
+
                 return;
             }));
         }
@@ -85,6 +90,8 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         {
             get => stopCommand ?? (stopCommand = new RelayCommand((_) =>
             {
+                
+
                 return;
             }));
         }
@@ -163,7 +170,11 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         public string OutputArt
         {
             get => art;
-            set => art = value;
+            set
+            {
+                art = value;
+                OnPropertyChanged("OutputArt");
+            }
         }
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         { 

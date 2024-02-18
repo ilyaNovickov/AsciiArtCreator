@@ -170,9 +170,9 @@ ContentStringFormat="{}{0:P}">
                              HorizontalScrollBarVisibility="Visible"
                              VerticalScrollBarVisibility="Visible"
                              IsReadOnly="False">
-                    <FlowDocument PageWidth="1000000" 
+                    <FlowDocument PageWidth="100000"
                                   FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
-                        <Paragraph >
+                        <Paragraph>
                             <Run Text="{Binding OutputArt}"/>
                         </Paragraph>
                     </FlowDocument>
