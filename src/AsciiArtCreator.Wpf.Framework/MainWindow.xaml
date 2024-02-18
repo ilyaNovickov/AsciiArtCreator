@@ -103,7 +103,7 @@ ContentStringFormat="{}{0:P}">
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
+            <!--Ленточная панель-->
             <Fluent:Ribbon Grid.Row="0" CanCustomizeQuickAccessToolBarItems="False" CanQuickAccessLocationChanging="False">
                 <!--Основная панель-->
                 <Fluent:RibbonTabItem Header="Основное">
@@ -167,6 +167,8 @@ ContentStringFormat="{}{0:P}">
                 <!--Текстовый блок-->
                 <toolkit:RichTextBox x:Name="richTextBox"
                                 Grid.Column="1"
+                                     Background="Black"
+                                     Foreground="White"
                              HorizontalScrollBarVisibility="Visible"
                              VerticalScrollBarVisibility="Visible"
                              IsReadOnly="False">
