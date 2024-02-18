@@ -88,6 +88,14 @@ namespace AsciiArtCreator.SystemDrawing.Framework
             this.Image = image;
         }
 
+        public GrayscaleAsciiArt(string path)
+        {
+            if (!File.Exists(path))
+                throw new Exception("Такого файла не существует");
+
+            this.Image = Image.FromFile(path);
+        }
+
         public Image Image
         {
             get => image;
