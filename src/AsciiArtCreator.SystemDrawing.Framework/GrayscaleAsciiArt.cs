@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.IO;
 using System.Drawing.Imaging;
 
@@ -76,6 +77,7 @@ namespace AsciiArtCreator.SystemDrawing.Framework
 
         private Image image = null;
         private string art = null;
+        private GrayscaleArtFormat format = StandartAsciiArtMethods.DefaultFormat;
         private GrayscaleArtOptions options = new GrayscaleArtOptions();
 
         public GrayscaleAsciiArt()
@@ -107,6 +109,16 @@ namespace AsciiArtCreator.SystemDrawing.Framework
             }
         }
 
+        public GrayscaleArtFormat Format
+        {
+            get => format;
+            set
+            {
+                format = value;
+                art = null;
+            }
+        }
+
         public GrayscaleArtOptions ImageOptions
         {
             get => options;
@@ -135,6 +147,27 @@ namespace AsciiArtCreator.SystemDrawing.Framework
         public string GetAsciiArt()
         {
             return art;
+        }
+
+        public string GetOrCreateAsciiArt()
+        {
+            return format.Func.Invoke((Bitmap)Image, format.SymbolCollection, options, null, null);
+        }
+
+        public async Task<string> GetOrCreateAsciiArtAsync(CancellationToken? token = null)
+        {
+            return await Task<string>.Run(() =>
+            {
+                return format.Func.Invoke((Bitmap)Image, format.SymbolCollection, options, null, null);
+            });
+        }
+
+        public async Task<string> GetOrCreateAsciiArtAsync(IProgress<int> progress, CancellationToken? token = null)
+        {
+            return await Task<string>.Run(() =>
+            {
+                return format.Func.Invoke((Bitmap)Image, format.SymbolCollection, options, token, progress);
+            });
         }
 
         //public void GetOrCreateAsciiArt()
