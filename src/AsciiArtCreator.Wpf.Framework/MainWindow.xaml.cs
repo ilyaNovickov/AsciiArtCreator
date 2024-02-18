@@ -1,4 +1,5 @@
-﻿using AsciiArtCreator.Wpf.Framework.ViewModel;
+﻿using AsciiArtCreator.Wpf.Framework.Helpers;
+using AsciiArtCreator.Wpf.Framework.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace AsciiArtCreator.Wpf.Framework
             viewModel = new MainViewModel();
             DataContext = viewModel;
 
+            FontHelper.GetFonts();
 
             richTextBox.Document.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Assests/Fonts/#Anonymous pro");
         }
