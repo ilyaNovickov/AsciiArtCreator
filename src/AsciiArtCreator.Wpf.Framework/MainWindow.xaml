@@ -126,7 +126,8 @@ ContentStringFormat="{}{0:P}">
                     <Fluent:RibbonGroupBox Header="Преобразование">
                         <Fluent:Button Header="Старт" 
                                        Icon="pack://application:,,,/Assests/start.png"
-                                       Command="{Binding GetArtCommand}"/>
+                                       Command="{Binding GetArtCommand}" 
+                                       CommandParameter="{Binding ElementName=formatsComboBox, Path=SelectedItem}"/>
                         <Fluent:Button Header="Стоп" 
                                        Icon="pack://application:,,,/Assests/stopRed.png"
                                        Command="{Binding StopCommand}"/>
@@ -140,6 +141,13 @@ ContentStringFormat="{}{0:P}">
                             </StackPanel>
                             
                         </Fluent:RibbonToolBar>
+                    </Fluent:RibbonGroupBox>
+                    <!--Панель преобразования картинки-->
+                    <Fluent:RibbonGroupBox Header="ASCII преобразования">
+                        <Fluent:ComboBox x:Name="formatsComboBox" MinWidth="100"
+                                         ItemsSource="{Binding ArtFormats}" 
+                                         SelectedIndex="0"
+                                         DisplayMemberPath="Name"/>
                     </Fluent:RibbonGroupBox>
                 </Fluent:RibbonTabItem>
                 

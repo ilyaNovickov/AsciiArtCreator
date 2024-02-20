@@ -11,7 +11,7 @@ using AsciiArtCreator.SystemDrawing.Framework.Helpers;
 
 namespace AsciiArtCreator.SystemDrawing.Framework
 {
-    internal static class StandartAsciiArtMethods
+    public static class StandartAsciiArtMethods
     {
         private static readonly Dictionary<int, char> brayallSimbols = new Dictionary<int, char>()
         {
