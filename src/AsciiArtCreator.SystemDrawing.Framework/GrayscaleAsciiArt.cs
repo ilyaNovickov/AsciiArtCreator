@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Diagnostics;
 
 namespace AsciiArtCreator.SystemDrawing.Framework
 {
@@ -187,18 +188,22 @@ namespace AsciiArtCreator.SystemDrawing.Framework
 
         public async Task<string> GetOrCreateAsciiArtAsync(CancellationToken? token = null)
         {
-            return await Task<string>.Run(() =>
+            string str = await Task.Run(() =>
             {
-                return format.Func.Invoke((Bitmap)Image, format.SymbolCollection, options, null, null);
+                return format.Func.Invoke((Bitmap)Image, format.SymbolCollection, options, token, null);
             });
+
+            return str;
         }
 
         public async Task<string> GetOrCreateAsciiArtAsync(IProgress<int> progress, CancellationToken? token = null)
         {
-            return await Task<string>.Run(() =>
+            string str = await Task.Run(() =>
             {
                 return format.Func.Invoke((Bitmap)Image, format.SymbolCollection, options, token, progress);
             });
+
+            return str;
         }
 
         public void Dispose()
