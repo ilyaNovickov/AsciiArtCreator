@@ -89,11 +89,16 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         {
             get => getArtCommand ?? (getArtCommand = new RelayCommand(async (_) =>
             {
+                if (ImagePath == null)
+                    return;
+
                 GrayscaleAsciiArt asciiArt = new GrayscaleAsciiArt(ImagePath);
 
                 asciiArt.Format = (GrayscaleArtFormat)_;
 
                 OutputArt = await asciiArt.GetOrCreateAsciiArtAsync();
+
+                asciiArt.Dispose();
 
                 return;
             }));
