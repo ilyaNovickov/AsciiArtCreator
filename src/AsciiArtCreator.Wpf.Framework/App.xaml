@@ -4,8 +4,6 @@
              xmlns:local="clr-namespace:AsciiArtCreator.Wpf.Framework"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <FontFamily x:Key="AnonymousPro">pack://application:,,,/Assests/Fonts/#Anonymous pro</FontFamily>
-        
-        <ResourceDictionary x:Key="asda" Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
     </Application.Resources>
 </Application>

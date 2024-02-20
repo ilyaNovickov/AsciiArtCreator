@@ -51,7 +51,20 @@ namespace AsciiArtCreator.Wpf.Framework.Helpers
 
             ICollection<FontFamily> fonts = Fonts.SystemFontFamilies;
 
-            List<FontFamily> avaibleFonts = new List<FontFamily>(5);
+            List<FontFamily> avaibleFonts = new List<FontFamily>(25)
+            {
+                new FontFamily(new Uri("pack://application:,,,/"), "./Assests/Fonts/#Anonymous pro"),
+                new FontFamily(new Uri("pack://application:,,,/"), "./Assests/Fonts/#Codename Coder Free 4F"),
+                new FontFamily(new Uri("pack://application:,,,/"), "./Assests/Fonts/#Cousine"),
+                new FontFamily(new Uri("pack://application:,,,/"), "./Assests/Fonts/#Droid Sans Mono Slashed"),
+                new FontFamily(new Uri("pack://application:,,,/"), "./Assests/Fonts/#Fira Mono"),
+                //             ______
+                //             ||||||
+                // unmono font \/\/\/
+                //new FontFamily(new Uri("pack://application:,,,/"), "./Assests/Fonts/#OpenGost Type A TT"),
+                new FontFamily(new Uri("pack://application:,,,/"), "./Assests/Fonts/#Rubik Mono One"),
+                new FontFamily(new Uri("pack://application:,,,/"), "./Assests/Fonts/#Vin Mono Pro Light"),
+            };
 
             foreach (FontFamily font in fonts)
             {
@@ -60,8 +73,13 @@ namespace AsciiArtCreator.Wpf.Framework.Helpers
 
                 avaibleFonts.Add(font);
             }
-
+            
             return avaibleFonts;
+        }
+
+        public static async Task<IEnumerable<FontFamily>> GetFontsAsync()
+        {
+            return await Task.Run(() => { return GetFonts(); });
         }
     }
 }

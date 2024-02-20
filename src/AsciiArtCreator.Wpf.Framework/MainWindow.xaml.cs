@@ -2,6 +2,7 @@
 using AsciiArtCreator.Wpf.Framework.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -25,19 +26,31 @@ namespace AsciiArtCreator.Wpf.Framework
     {
         private MainViewModel viewModel = null;
 
+        private ObservableCollection<FontFamily> fonts = null;
+
         public MainWindow()
         {
             InitializeComponent();
             viewModel = new MainViewModel();
             DataContext = viewModel;
-
-            FontHelper.GetFonts();
-
-            richTextBox.Document.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./Assests/Fonts/#Anonymous pro");
         }
+
         private double a => (viewModel.MinScale * viewModel.MaxScale - Math.Pow(1d, 2d)) / (viewModel.MinScale - 2d * 1d + viewModel.MaxScale);
         private double b => Math.Pow((1d - viewModel.MinScale), 2d) / (viewModel.MinScale - 2d * 1d + viewModel.MaxScale);
         private double c => 2d * Math.Log((viewModel.MaxScale - 1d) / (1d - viewModel.MinScale));
+
+        public ObservableCollection<FontFamily> Fonts => fonts;
+
+        private async void GetFontsAsync()
+        {
+            IEnumerable<FontFamily> avaibleFonts = await Task.Run(() => FontHelper.GetFonts());
+
+            fonts = new ObservableCollection<FontFamily>(avaibleFonts);
+
+            fontComboBox.ItemsSource = Fonts;
+
+            fontComboBox.SelectedIndex = Fonts.IndexOf(new FontFamily("Consolas"));
+        }
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -81,6 +94,11 @@ namespace AsciiArtCreator.Wpf.Framework
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            GetFontsAsync();
         }
     }
 }

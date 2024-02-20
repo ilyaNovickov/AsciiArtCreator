@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.IO;
 using AsciiArtCreator.Wpf.Framework.Commands;
 using AsciiArtCreator.SystemDrawing.Framework;
+using AsciiArtCreator.Wpf.Framework.Helpers;
+using System.Collections.ObjectModel;
 
 namespace AsciiArtCreator.Wpf.Framework.ViewModel
 {
@@ -26,7 +28,10 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         private float maxScale = 10.0f;
         private float scale = 1f;
 
+
+
         private string art = "";//"{\\rtf1\\ansi\\ansicpg1252\\uc1\\htmautsp\\deff2{\\fonttbl{\\f0\\fcharset0 Times New Roman;}{\\f2\\fcharset0 Segoe UI;}}{\\colortbl\\red0\\green0\\blue0;\\red255\\green255\\blue255;}\\loch\\hich\\dbch\\pard\\plain\\ltrpar\\itap0{\\lang1033\\fs18\\f2\\cf0 \\cf0\\ql{\\f2 {\\ltrch This is the }{\\b\\ltrch RichTextBox}\\li0\\ri0\\sa0\\sb0\\fi0\\ql\\par}}}";
+
 
         public string ImagePath
         {
@@ -90,7 +95,6 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         {
             get => stopCommand ?? (stopCommand = new RelayCommand((_) =>
             {
-                
 
                 return;
             }));
@@ -176,6 +180,9 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
                 OnPropertyChanged("OutputArt");
             }
         }
+
+
+
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         { 
            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));

@@ -9,7 +9,8 @@
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:s="clr-namespace:System;assembly=System"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Loaded="Window_Loaded">
     <Window.Resources>
         <BitmapImage x:Key="DefaultImage" UriSource="Assests/about.png"/>
         <!--<FontFamily x:Key="DefaultFont">
@@ -105,8 +106,7 @@ ContentStringFormat="{}{0:P}">
             <!--Ленточная панель-->
             <Fluent:Ribbon Grid.Row="0" 
                            CanCustomizeQuickAccessToolBarItems="False" 
-                           CanQuickAccessLocationChanging="False"
-                           Resources="{StaticResource asda}">
+                           CanQuickAccessLocationChanging="False">
                 <!--Основная панель-->
                 <Fluent:RibbonTabItem Header="Основное">
                     <!--Панель с основными предметами-->
@@ -138,7 +138,6 @@ ContentStringFormat="{}{0:P}">
                         <Fluent:RibbonToolBar>
                             <StackPanel Orientation="Horizontal">
                                 <Fluent:ComboBox x:Name="fontComboBox" 
-                                                    ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" 
                                                      SelectedValue="Consolas" 
                                                      IsReadOnly="True" 
                                                      MinWidth="100"/>
