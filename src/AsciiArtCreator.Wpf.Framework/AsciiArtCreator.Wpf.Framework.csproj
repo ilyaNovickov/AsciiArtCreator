@@ -166,5 +166,8 @@
     <Resource Include="Assests\start.png" />
     <Resource Include="Assests\stopRed.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assests\nonImage.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

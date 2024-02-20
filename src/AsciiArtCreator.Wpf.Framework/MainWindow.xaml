@@ -12,12 +12,7 @@
         Title="MainWindow" Height="450" Width="800"
         Loaded="Window_Loaded">
     <Window.Resources>
-        <BitmapImage x:Key="DefaultImage" UriSource="Assests/about.png"/>
-        <!--<FontFamily x:Key="DefaultFont">
-            <FontFamily.FamilyNames>
-                Consolas
-            </FontFamily.FamilyNames>
-        </FontFamily>-->
+        <BitmapImage x:Key="DefaultImage" UriSource="Assests/nonImage.png"/>
     </Window.Resources>
     <DockPanel>
         <!--Меню-->
