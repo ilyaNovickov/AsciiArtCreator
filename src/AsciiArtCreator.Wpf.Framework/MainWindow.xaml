@@ -144,10 +144,27 @@ ContentStringFormat="{}{0:P}">
                     </Fluent:RibbonGroupBox>
                     <!--Панель преобразования картинки-->
                     <Fluent:RibbonGroupBox Header="ASCII преобразования">
-                        <Fluent:ComboBox x:Name="formatsComboBox" MinWidth="100"
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Форматы"/>
+                            <Fluent:ComboBox x:Name="formatsComboBox" MinWidth="100"
                                          ItemsSource="{Binding ArtFormats}" 
                                          SelectedIndex="0"
                                          DisplayMemberPath="Name"/>
+                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Content="asdas0" Grid.Row="0" Grid.Column="0"/>
+                            <toolkit:IntegerUpDown Grid.Row="0" Grid.Column="1"/>
+                            <Label Content="asdas0" Grid.Row="1" Grid.Column="0"/>
+                            <toolkit:IntegerUpDown Grid.Row="1" Grid.Column="1"/>
+                        </Grid>
                     </Fluent:RibbonGroupBox>
                 </Fluent:RibbonTabItem>
                 
@@ -171,6 +188,7 @@ ContentStringFormat="{}{0:P}">
                 <!--Текстовый блок-->
                 <toolkit:RichTextBox x:Name="richTextBox"
                                 Grid.Column="1"
+                                     Focusable="False"
                                      Background="Black"
                                      Foreground="White"
                              HorizontalScrollBarVisibility="Visible"
