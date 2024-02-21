@@ -81,7 +81,26 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         {
             get => saveCommand ?? (saveCommand = new RelayCommand((_) =>
             {
-                return;
+                if (OutputArt == null)
+                    return;
+
+                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
+
+                saveFileDialog.Filter = "Text file (*.txt)|*.txt";
+
+                bool? res = saveFileDialog.ShowDialog();
+
+                if (res.HasValue && res.Value)
+                {
+                    using (FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create))
+                    {
+                        StreamWriter streamWriter = new StreamWriter(fileStream);
+
+                        streamWriter.Write(OutputArt);
+
+                        streamWriter.Close();
+                    }
+                }
             }));
         }
 
