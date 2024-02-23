@@ -110,7 +110,7 @@ namespace AsciiArtCreator.SystemDrawing.Framework
             {
                 defaultFormat,
                 new GrayscaleArtFormat("Many2",
-                    new List<char>() { '.', ',', ';', '+', '*', '?', '%', '$', '#', '@', '█' }, BitmapStandartMethod),
+                    new List<char>() {' ', '.', ',', ';', '+', '*', '?', '%', '$', '#', '@' }, BitmapStandartMethod),
                 new GrayscaleArtFormat("Two",
                     new List<char>() { '░', '█' }, BitmapStandartMethod),
                 new GrayscaleArtFormat("Four",

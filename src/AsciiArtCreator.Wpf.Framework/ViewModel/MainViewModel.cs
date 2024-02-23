@@ -54,7 +54,7 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
                         //throw new Exception("Значение должно быть в интервале от минимального до максимального");
                         return;
 
-                    if (saveProportions && height != (int)Math.Round(value / ProportionValueWH))
+                    if (SaveProportions && height != (int)Math.Round(value / ProportionValueWH))
                     {
                         int newHeight = (int)Math.Round(value / ProportionValueWH);
                         
@@ -78,7 +78,7 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
                         //throw new Exception("Значение должно быть в интервале от минимального до максимального");
                         return;
 
-                    if (saveProportions && width != (int)Math.Round(value * ProportionValueWH))
+                    if (SaveProportions && width != (int)Math.Round(value * ProportionValueWH))
                     {
                         int newWidth = (int)Math.Round(value * ProportionValueWH);
                         
