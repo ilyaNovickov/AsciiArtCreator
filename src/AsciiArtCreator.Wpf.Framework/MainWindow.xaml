@@ -160,11 +160,19 @@ ContentStringFormat="{}{0:P}">
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Label Content="asdas0" Grid.Row="0" Grid.Column="0"/>
-                            <toolkit:IntegerUpDown Grid.Row="0" Grid.Column="1"/>
-                            <Label Content="asdas0" Grid.Row="1" Grid.Column="0"/>
-                            <toolkit:IntegerUpDown Grid.Row="1" Grid.Column="1"/>
+                            <Label Content="Ширина" Grid.Row="0" Grid.Column="0"/>
+                            <toolkit:IntegerUpDown Grid.Row="0" Grid.Column="1" DataContext="{Binding AsciiArtData}"
+                                                   Value="{Binding Width}" 
+                                                   Minimum="{Binding MinWidth}"
+                                                   Maximum="{Binding MaxWidth}"/>
+                            <Label Content="Высота" Grid.Row="1" Grid.Column="0"/>
+                            <toolkit:IntegerUpDown Grid.Row="1" Grid.Column="1" DataContext="{Binding AsciiArtData}"
+                                                   Value="{Binding Height}" 
+                                                   Minimum="{Binding MinHeight}"
+                                                   Maximum="{Binding MaxHeight}"/>
                         </Grid>
+                        <Fluent:CheckBox Header="Сохранять пропорции" DataContext="{Binding AsciiArtData}"
+                                         IsChecked="{Binding SaveProportions}"/>
                     </Fluent:RibbonGroupBox>
                 </Fluent:RibbonTabItem>
                 

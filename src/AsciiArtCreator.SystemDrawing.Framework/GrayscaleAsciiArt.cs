@@ -84,8 +84,8 @@ namespace AsciiArtCreator.SystemDrawing.Framework
                 get => width;
                 set
                 {
-                    if (value < MinWidth)
-                        throw new Exception("Value can't be below than minimum value");
+                    if (value < MinWidth || value > MaxWidth)
+                        throw new Exception("Значение должно быть в интервале от минимального до максимального");
                     width = value;
                 }
             }
@@ -95,6 +95,9 @@ namespace AsciiArtCreator.SystemDrawing.Framework
                 get => height;
                 set
                 {
+                    if (value < MinHeight || value > MaxHeight)
+                        throw new Exception("Значение должно быть в интервале от минимального до максимального");
+
                     if (value < MinWidth)
                         throw new Exception("Value can't be below than minimum value");
                     height = value;
