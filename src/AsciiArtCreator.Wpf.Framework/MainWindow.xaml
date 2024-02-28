@@ -186,7 +186,7 @@ ContentStringFormat="{}{0:P}">
                 </Grid.ColumnDefinitions>
 
                 <!--Изображение-->
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" Background="Gray" Grid.Column="0">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" Background="Gray" Grid.Column="0" Margin="5,0,0,0">
                     <Image x:Name="image" Stretch="None" Source="{Binding ImagePath, TargetNullValue={StaticResource DefaultImage}}" Grid.Column="0">
                         <Image.LayoutTransform>
                             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
@@ -194,7 +194,7 @@ ContentStringFormat="{}{0:P}">
                     </Image>
                 </ScrollViewer>
                 <!--Текстовый блок-->
-                <toolkit:Zoombox Grid.Column="1">
+                <toolkit:Zoombox Grid.Column="1" Background="Gray" Margin="0,0,5,0">
                     <!--<toolkit:RichTextBox x:Name="richTextBox"
                                          Focusable="True"
                                          Background="Black"

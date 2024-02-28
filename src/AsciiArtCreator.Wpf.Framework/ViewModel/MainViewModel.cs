@@ -201,79 +201,6 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
             //}
         }
 
-        //public int Width
-        //{
-        //    get => artData.Width;
-        //    set
-        //    {
-        //        artData.Width = value;
-        //        OnPropertyChanged("Width");
-        //    }
-        //}
-
-        //public int Height
-        //{
-        //    get => artData.Height;
-        //    set
-        //    {
-        //        artData.Height = value;
-        //        OnPropertyChanged("Height");
-        //    }
-        //}
-
-        //public bool SaveProportions
-        //{
-        //    get => artData.SaveProportions;
-        //    set
-        //    {
-        //        artData.SaveProportions = value;
-        //        if (artData.SaveProportions)
-        //            artData.UpdateSize();
-        //        OnPropertyChanged("SaveProportions");
-        //    }
-        //}
-
-        //public int MinWidth
-        //{
-        //    get => artData.MinWidth;
-        //    set
-        //    {
-        //        artData.MinWidth = value;
-        //        OnPropertyChanged("MinWidth");
-        //    }
-        //}
-
-        //public int MinHeight
-        //{
-        //    get => artData.MinHeight;
-        //    set
-        //    {
-        //        artData.MinHeight = value;
-        //        OnPropertyChanged("MinHeight");
-        //    }
-        //}
-
-        //public int MaxWidth
-        //{
-        //    get => artData.MaxWidth;
-        //    set
-        //    {
-        //        artData.MaxWidth = value;
-        //        OnPropertyChanged("MaxWidth");
-        //    }
-        //}
-
-        //public int MaxHeight
-        //{
-        //    get => artData.MaxHeight;
-        //    set
-        //    {
-        //        artData.MaxHeight = value;
-        //        OnPropertyChanged("MaxHeight");
-        //    }
-        //}
-
-
         private string art = "";//"{\\rtf1\\ansi\\ansicpg1252\\uc1\\htmautsp\\deff2{\\fonttbl{\\f0\\fcharset0 Times New Roman;}{\\f2\\fcharset0 Segoe UI;}}{\\colortbl\\red0\\green0\\blue0;\\red255\\green255\\blue255;}\\loch\\hich\\dbch\\pard\\plain\\ltrpar\\itap0{\\lang1033\\fs18\\f2\\cf0 \\cf0\\ql{\\f2 {\\ltrch This is the }{\\b\\ltrch RichTextBox}\\li0\\ri0\\sa0\\sb0\\fi0\\ql\\par}}}";
 
         public ObservableCollection<GrayscaleArtFormat> ArtFormats
@@ -391,7 +318,7 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
                 if (ImagePath == null)
                     return;
 
-                GetDocSize();
+                
 
                 GrayscaleAsciiArt asciiArt = new GrayscaleAsciiArt(ImagePath);
 
@@ -400,11 +327,13 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
                 asciiArt.ImageOptions.Height = artData.Height;
                 asciiArt.ImageOptions.Width = artData.Width;
 
-                OutputArt = await asciiArt.GetOrCreateAsciiArtAsync();
+                string str = await asciiArt.GetOrCreateAsciiArtAsync();
 
                 asciiArt.Dispose();
 
-                
+                GetDocSize(in str);
+
+                OutputArt = str;
 
                 return;
             }));
@@ -418,38 +347,6 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
             }));
         }
 
-        //public RelayCommand CopyCommand
-        //{
-        //    get => saveCommand ?? (saveCommand = new RelayCommand((_) =>
-        //    {
-        //        return;
-        //    }));
-        //}
-
-        //public ActionCommand<float> ScaleChangeCommand
-        //{
-        //    get => scaleChangeCommand ?? (scaleChangeCommand = new ActionCommand<float>((value) =>
-        //    {
-        //        Scale = value;
-        //    }));
-        //}
-
-        //public RelayCommand SelectFontCommand
-        //{
-        //    get => selectFontCommand ?? (selectFontCommand = new RelayCommand((_) =>
-        //    {
-        //        Microsoft.Win32.Fo openFileDialog = new Microsoft.Win32.OpenFileDialog();
-
-        //        openFileDialog.Filter = "Image files (*.png, *.jpeg, *.jpg, *.bmp)|*.png;*.jpeg;*.jpg;*.bmp";
-
-        //        bool? ok = openFileDialog.ShowDialog();
-
-        //        if (ok.HasValue && ok.Value)
-        //        {
-        //            ImagePath = openFileDialog.FileName;
-        //        }
-        //    }));
-        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -522,22 +419,22 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
             }
         }
 
-        private void GetDocSize()
+        private void GetDocSize(in string str)
         {
             FontFamily fontFamily = new FontFamily("Consolas");
 
             FormattedText formattedText = new FormattedText(
-                            "A",
+                            str,
                             CultureInfo.CurrentCulture,
                             FlowDirection.LeftToRight,
                             fontFamily.GetTypefaces().First(),
                             12d,
                             Brushes.Black,
                             new NumberSubstitution(),
-                            1);
+                            1.25d);
 
-            DocWidth = formattedText.Width * artData.Width + 5d;
-            DocHeight = formattedText.Height * artData.Height + 5d;
+            DocWidth = formattedText.Width + 30d;//* artData.Width + 5d;
+            DocHeight = formattedText.Height + 30d;//* artData.Height + 5d;
         }
 
         public void OnPropertyChanged([CallerMemberName] string prop = "")
