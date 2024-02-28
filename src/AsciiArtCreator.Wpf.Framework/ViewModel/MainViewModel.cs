@@ -11,9 +11,13 @@ using AsciiArtCreator.SystemDrawing.Framework;
 using AsciiArtCreator.Wpf.Framework.Helpers;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Media3D;
-using System.Drawing;
 using static AsciiArtCreator.Wpf.Framework.ViewModel.MainViewModel;
 using System.Runtime.InteropServices;
+using System.Windows.Media.Imaging;
+using System.Globalization;
+using System.Windows.Media;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace AsciiArtCreator.Wpf.Framework.ViewModel
 {
@@ -293,9 +297,14 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
 
         private void GetImageSize(string path)
         {
-            Image img = Image.FromFile(path);
+            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                BitmapFrame bitmapFrame = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.None);
 
-            artData.ProportionValueWH = (float)img.Width / (float)img.Height;
+                artData.ProportionValueWH = (float)bitmapFrame.PixelWidth / (float)bitmapFrame.PixelHeight;
+            }
+
+            
         }
 
         public RelayCommand SelectFileCommand
@@ -319,7 +328,32 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         {
             get => exportCommand ?? (exportCommand = new RelayCommand((_) =>
             {
-                return;
+                Image myImage = new Image();
+                FormattedText text = new FormattedText(OutputArt,
+                        new CultureInfo("en-us"),
+                        FlowDirection.LeftToRight,
+                        new Typeface(new FontFamily("Consolas"), FontStyles.Normal, FontWeights.Normal, new FontStretch()),
+                        12d,
+                        Brushes.Black);
+
+                DrawingVisual drawingVisual = new DrawingVisual();
+                DrawingContext drawingContext = drawingVisual.RenderOpen();
+                drawingContext.DrawText(text, new Point(2, 2));
+                drawingContext.Close();
+
+                RenderTargetBitmap bmp = new RenderTargetBitmap(6000, 6000, 120, 96, PixelFormats.Pbgra32);
+                bmp.Render(drawingVisual);
+
+                var encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bmp));
+
+                // 6) save image to file
+                using (var imageFile = new FileStream("text.png", FileMode.Create, FileAccess.Write))
+                {
+                    encoder.Save(imageFile);
+                    imageFile.Flush();
+                    imageFile.Close();
+                }
             }));
         }
 
@@ -357,6 +391,8 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
                 if (ImagePath == null)
                     return;
 
+                GetDocSize();
+
                 GrayscaleAsciiArt asciiArt = new GrayscaleAsciiArt(ImagePath);
 
                 asciiArt.Format = (GrayscaleArtFormat)_;
@@ -367,6 +403,8 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
                 OutputArt = await asciiArt.GetOrCreateAsciiArtAsync();
 
                 asciiArt.Dispose();
+
+                
 
                 return;
             }));
@@ -461,7 +499,46 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
             }
         }
 
+        private double docWidth = 500d;
+        private double docHeight = 500d;
 
+        public double DocWidth
+        {
+            get => docWidth;
+            set
+            {
+                docWidth = value;
+                OnPropertyChanged("DocWidth");
+            }
+        }
+
+        public double DocHeight
+        {
+            get => docHeight;
+            set
+            {
+                docHeight = value;
+                OnPropertyChanged("DocHeight");
+            }
+        }
+
+        private void GetDocSize()
+        {
+            FontFamily fontFamily = new FontFamily("Consolas");
+
+            FormattedText formattedText = new FormattedText(
+                            "A",
+                            CultureInfo.CurrentCulture,
+                            FlowDirection.LeftToRight,
+                            fontFamily.GetTypefaces().First(),
+                            12d,
+                            Brushes.Black,
+                            new NumberSubstitution(),
+                            1);
+
+            DocWidth = formattedText.Width * artData.Width + 5d;
+            DocHeight = formattedText.Height * artData.Height + 5d;
+        }
 
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         { 

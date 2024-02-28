@@ -194,21 +194,39 @@ ContentStringFormat="{}{0:P}">
                     </Image>
                 </ScrollViewer>
                 <!--Текстовый блок-->
-                <toolkit:RichTextBox x:Name="richTextBox"
-                                Grid.Column="1"
-                                     Focusable="False"
-                                     Background="Black"
-                                     Foreground="White"
-                             HorizontalScrollBarVisibility="Visible"
-                             VerticalScrollBarVisibility="Visible"
-                             IsReadOnly="False">
-                    <FlowDocument PageWidth="100000"
-                                  FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
-                        <Paragraph>
-                            <Run Text="{Binding OutputArt}"/>
-                        </Paragraph>
-                    </FlowDocument>
-                </toolkit:RichTextBox>
+                <toolkit:Zoombox Grid.Column="1">
+                    <!--<toolkit:RichTextBox x:Name="richTextBox"
+                                         Focusable="True"
+                                         Background="Black"
+                                         Foreground="White"
+                                         IsReadOnly="True"
+                                         HorizontalScrollBarVisibility="Auto"
+                                         
+                                         FontFamily="{Binding ElementName=fontComboBox, 
+                        Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Text="{Binding OutputArt}"/>-->
+                    
+                    <toolkit:RichTextBox x:Name="richTextBox"
+                Grid.Column="1"
+                     Focusable="False"
+                     Background="Black"
+                     Foreground="White"
+             HorizontalScrollBarVisibility="Visible"
+             VerticalScrollBarVisibility="Visible"
+                                         Width="{Binding DocWidth}"
+Height="{Binding DocHeight}"
+             IsReadOnly="False"
+                                         FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+    <FlowDocument 
+                  
+        >
+        <Paragraph>
+            <Run Text="{Binding OutputArt}"/>
+        </Paragraph>
+    </FlowDocument>
+</toolkit:RichTextBox>
+                </toolkit:Zoombox>
+                
             </Grid>
         </Grid>
     </DockPanel>
