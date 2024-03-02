@@ -105,13 +105,6 @@
                     </Fluent:RibbonGroupBox>
                     <!--Панель преобразования картинки-->
                     <Fluent:RibbonGroupBox Header="ASCII преобразования">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Форматы"/>
-                            <Fluent:ComboBox x:Name="formatsComboBox" MinWidth="100"
-                                         ItemsSource="{Binding ArtFormats}" 
-                                         SelectedIndex="0"
-                                         DisplayMemberPath="Name"/>
-                        </StackPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -121,19 +114,37 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Label Content="Ширина" Grid.Row="0" Grid.Column="0"/>
-                            <toolkit:IntegerUpDown Grid.Row="0" Grid.Column="1" DataContext="{Binding AsciiArtData}"
+                            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">
+                                <Label Content="Форматы" VerticalAlignment="Center"/>
+                                <Fluent:ComboBox x:Name="formatsComboBox" MinWidth="100"
+                                         ItemsSource="{Binding ArtFormats}" 
+                                         SelectedIndex="0"
+                                         DisplayMemberPath="Name"/>
+                            </StackPanel>
+                            <Grid Grid.Column="1" Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Content="Ширина" Grid.Row="0" Grid.Column="0"/>
+                                <toolkit:IntegerUpDown Grid.Row="0" Grid.Column="1" DataContext="{Binding AsciiArtData}"
                                                    Value="{Binding Width}" 
                                                    Minimum="{Binding MinWidth}"
                                                    Maximum="{Binding MaxWidth}"/>
-                            <Label Content="Высота" Grid.Row="1" Grid.Column="0"/>
-                            <toolkit:IntegerUpDown Grid.Row="1" Grid.Column="1" DataContext="{Binding AsciiArtData}"
+                                <Label Content="Высота" Grid.Row="1" Grid.Column="0"/>
+                                <toolkit:IntegerUpDown Grid.Row="1" Grid.Column="1" DataContext="{Binding AsciiArtData}"
                                                    Value="{Binding Height}" 
                                                    Minimum="{Binding MinHeight}"
                                                    Maximum="{Binding MaxHeight}"/>
+                            </Grid>
+                            <Fluent:CheckBox Grid.Column="0" Grid.Row="1" Header="Скрыть изображение" x:Name="hideImageCheckBox"/>
+                            <Fluent:CheckBox Header="Сохранять пропорции" DataContext="{Binding AsciiArtData}"
+                                         IsChecked="{Binding SaveProportions}" Grid.Column="1" Grid.Row="1"/>
                         </Grid>
-                        <Fluent:CheckBox Header="Сохранять пропорции" DataContext="{Binding AsciiArtData}"
-                                         IsChecked="{Binding SaveProportions}"/>
                     </Fluent:RibbonGroupBox>
                 </Fluent:RibbonTabItem>
 
@@ -141,7 +152,20 @@
             <!--Основная панель-->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition x:Name="imageColumn">
+                        <ColumnDefinition.Style>
+                            <Style TargetType="ColumnDefinition">
+                                <Setter Property="Width" Value="*" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=hideImageCheckBox, Path=IsChecked}" Value="False">
+                                        <Setter Property="Width" Value="0" />
+                                        <Setter Property="IsEnabled" Value="False" />
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ColumnDefinition.Style>
+                    </ColumnDefinition>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <!--Изображение-->
@@ -220,7 +244,7 @@ ContentStringFormat="{}{0:P}">
                             </ItemsPanelTemplate>
                         </StatusBar.ItemsPanel>
                         <StatusBarItem Grid.Column="1">
-                            <ProgressBar x:Name="progresBar" Height="20" Width="150" Minimum="0" Maximum="100" Value="50"/>
+                            <ProgressBar x:Name="progresBar" Height="20" Width="150" Minimum="0" Maximum="100" Value="{Binding ProgressValue}"/>
                         </StatusBarItem>
                     </StatusBar>
                     <toolkit:RichTextBox x:Name="richTextBox"

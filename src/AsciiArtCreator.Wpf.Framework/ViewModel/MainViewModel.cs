@@ -14,6 +14,7 @@ using System.Windows.Media.Media3D;
 using System.Drawing;
 using static AsciiArtCreator.Wpf.Framework.ViewModel.MainViewModel;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace AsciiArtCreator.Wpf.Framework.ViewModel
 {
@@ -275,7 +276,7 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
                 }
             }));
         }
-
+        private CancellationTokenSource cancellationTokenSource = null;
         public RelayCommand GetArtCommand
         {
             get => getArtCommand ?? (getArtCommand = new RelayCommand(async (_) =>
@@ -287,6 +288,7 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
                     return;
 
                 isBusy = true;
+                
 
                 GrayscaleAsciiArt asciiArt = new GrayscaleAsciiArt(ImagePath);
 
@@ -294,10 +296,13 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
 
                 asciiArt.ImageOptions.Height = artData.Height;
                 asciiArt.ImageOptions.Width = artData.Width;
-
-                OutputArt = await asciiArt.GetOrCreateAsciiArtAsync();
+                cancellationTokenSource = new CancellationTokenSource();
+                OutputArt = await asciiArt.GetOrCreateAsciiArtAsync(new Progress<int>((value) => { ProgressValue = value; }), cancellationTokenSource.Token);
 
                 asciiArt.Dispose();
+
+                cancellationTokenSource.Dispose();
+                cancellationTokenSource = null;
 
                 isBusy = false;
             }));
@@ -307,7 +312,7 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         {
             get => stopCommand ?? (stopCommand = new RelayCommand((_) =>
             {
-                return;
+                cancellationTokenSource?.Cancel();
             }));
         }
 
@@ -358,6 +363,18 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
             {
                 art = value;
                 OnPropertyChanged("OutputArt");
+            }
+        }
+
+        private int progressValue;
+
+        public int ProgressValue
+        {
+            get => progressValue;
+            set
+            {
+                progressValue = value;
+                OnPropertyChanged("ProgressValue");
             }
         }
 
