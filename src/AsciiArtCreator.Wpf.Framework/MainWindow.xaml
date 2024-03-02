@@ -137,7 +137,8 @@ ContentStringFormat="{}{0:P}">
                                                      SelectedValue="Consolas" 
                                                      IsReadOnly="True" 
                                                      MinWidth="100"/>
-                                <toolkit:IntegerUpDown x:Name="intUpDown" Value="{Binding ElementName=richTextBox, Path=FontSize}" Minimum="1" Maximum="36"/>
+                                <toolkit:IntegerUpDown x:Name="intUpDown" Value="{Binding ElementName=richTextBox, Path=FontSize}" 
+                                                       Minimum="1" Maximum="21" ValueChanged="intUpDown_ValueChanged"/>
                             </StackPanel>
                             
                         </Fluent:RibbonToolBar>
@@ -203,7 +204,9 @@ ContentStringFormat="{}{0:P}">
                              VerticalScrollBarVisibility="Visible"
                              IsReadOnly="False">
                     <FlowDocument PageWidth="100000"
-                                  FontFamily="{Binding ElementName=fontComboBox, Path=SelectedValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                                  FontFamily="{Binding ElementName=fontComboBox, 
+                        Path=SelectedValue, Mode=OneWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
                         <Paragraph>
                             <Run Text="{Binding OutputArt}"/>
                         </Paragraph>

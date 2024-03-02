@@ -3,6 +3,7 @@ using AsciiArtCreator.Wpf.Framework.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -99,6 +100,25 @@ namespace AsciiArtCreator.Wpf.Framework
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             GetFontsAsync();
+        }
+
+        private void intUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            
+
+            FormattedText formattedText = new FormattedText(
+                            "A",
+                            CultureInfo.CurrentCulture,
+                            FlowDirection.LeftToRight,
+                            ((FontFamily)fontComboBox.SelectedItem).GetTypefaces().First(),
+                            intUpDown.Value.Value,
+                            Brushes.Black,
+                            new NumberSubstitution(),
+                            1);
+
+            var a = formattedText.Width * viewModel.AsciiArtData.Width;
+            var b = formattedText.Height * viewModel.AsciiArtData.Height;
+
         }
     }
 }

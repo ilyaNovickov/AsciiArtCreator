@@ -380,39 +380,6 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
             }));
         }
 
-        //public RelayCommand CopyCommand
-        //{
-        //    get => saveCommand ?? (saveCommand = new RelayCommand((_) =>
-        //    {
-        //        return;
-        //    }));
-        //}
-
-        //public ActionCommand<float> ScaleChangeCommand
-        //{
-        //    get => scaleChangeCommand ?? (scaleChangeCommand = new ActionCommand<float>((value) =>
-        //    {
-        //        Scale = value;
-        //    }));
-        //}
-
-        //public RelayCommand SelectFontCommand
-        //{
-        //    get => selectFontCommand ?? (selectFontCommand = new RelayCommand((_) =>
-        //    {
-        //        Microsoft.Win32.Fo openFileDialog = new Microsoft.Win32.OpenFileDialog();
-
-        //        openFileDialog.Filter = "Image files (*.png, *.jpeg, *.jpg, *.bmp)|*.png;*.jpeg;*.jpg;*.bmp";
-
-        //        bool? ok = openFileDialog.ShowDialog();
-
-        //        if (ok.HasValue && ok.Value)
-        //        {
-        //            ImagePath = openFileDialog.FileName;
-        //        }
-        //    }));
-        //}
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public float MinScale
