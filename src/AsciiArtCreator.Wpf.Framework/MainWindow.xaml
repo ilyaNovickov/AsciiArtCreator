@@ -132,15 +132,27 @@ ContentStringFormat="{}{0:P}">
                                        Icon="pack://application:,,,/Assests/stopRed.png"
                                        Command="{Binding StopCommand}"/>
                         <Fluent:RibbonToolBar>
-                            <StackPanel Orientation="Horizontal">
-                                <Fluent:ComboBox x:Name="fontComboBox" 
-                                                     SelectedValue="Consolas" 
-                                                     IsReadOnly="True" 
-                                                     MinWidth="100"/>
-                                <toolkit:IntegerUpDown x:Name="intUpDown" Value="{Binding ElementName=richTextBox, Path=FontSize}" 
-                                                       Minimum="1" Maximum="21" ValueChanged="intUpDown_ValueChanged"/>
-                            </StackPanel>
-                            
+                            <Grid Margin="5,5,5,5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                    <Fluent:ComboBox x:Name="fontComboBox" 
+                                                     SelectionChanged="fontComboBox_SelectionChanged"
+                         SelectedValue="Consolas" 
+                         IsReadOnly="True" 
+                         MinWidth="100"/>
+                                    <toolkit:IntegerUpDown x:Name="intUpDown" Value="{Binding ElementName=richTextBox, Path=FontSize}" 
+                           Minimum="1" Maximum="21" ValueChanged="intUpDown_ValueChanged"/>
+                                </StackPanel>
+                                <WrapPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Fluent:ToggleButton x:Name="boldToggleButton" Header="Bold" SizeDefinition="middle" Click="ToggleButton_Click"/>
+                                    <Fluent:ToggleButton x:Name="italicToggleButton" Header="Italic" SizeDefinition="middle" Click="ToggleButton_Click"/>
+                                </WrapPanel>
+                            </Grid>
+
                         </Fluent:RibbonToolBar>
                     </Fluent:RibbonGroupBox>
                     <!--Панель преобразования картинки-->
@@ -197,14 +209,14 @@ ContentStringFormat="{}{0:P}">
                 <!--Текстовый блок-->
                 <toolkit:RichTextBox x:Name="richTextBox"
                                 Grid.Column="1"
-                                     Focusable="False"
+                                     Focusable="True"
                                      Background="Black"
                                      Foreground="White"
                              HorizontalScrollBarVisibility="Visible"
                              VerticalScrollBarVisibility="Visible"
                              IsReadOnly="False">
                     <FlowDocument x:Name="document"
-                        
+                                    FontStretch="{Binding ElementName=weightCB, Path=SelectedItem}"
                                   FontFamily="{Binding ElementName=fontComboBox, 
                         Path=SelectedValue, Mode=OneWay, 
                         UpdateSourceTrigger=PropertyChanged}">

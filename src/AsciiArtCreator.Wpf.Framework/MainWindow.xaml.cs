@@ -122,5 +122,43 @@ namespace AsciiArtCreator.Wpf.Framework
             document.PageWidth = formattedText.Width * viewModel.AsciiArtData.Width + 50d;
             document.PageHeight = formattedText.Height * viewModel.AsciiArtData.Height + 50d;
         }
+
+        private void ToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender == boldToggleButton)
+            {
+                if (!boldToggleButton.IsChecked ?? false)
+                    document.FontWeight = FontWeights.Normal;
+                else
+                    document.FontWeight = FontWeights.Bold;
+
+            }
+            else if (sender == italicToggleButton)
+            {
+                if (!italicToggleButton.IsChecked ?? false)
+                    document.FontStyle = FontStyles.Normal;
+                else
+                    document.FontStyle = FontStyles.Italic;
+            }
+        }
+
+        private void fontComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (fontComboBox.SelectedItem == null)
+                return;
+
+            FormattedText formattedText = new FormattedText(
+                            "A",
+                            CultureInfo.CurrentCulture,
+                            FlowDirection.LeftToRight,
+                            ((FontFamily)fontComboBox.SelectedItem).GetTypefaces().First(),
+                            intUpDown.Value.Value,
+                            Brushes.Black,
+                            new NumberSubstitution(),
+                            1);
+
+            document.PageWidth = formattedText.Width * viewModel.AsciiArtData.Width + 50d;
+            document.PageHeight = formattedText.Height * viewModel.AsciiArtData.Height + 50d;
+        }
     }
 }
