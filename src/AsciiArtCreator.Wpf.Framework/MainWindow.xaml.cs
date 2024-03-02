@@ -104,7 +104,8 @@ namespace AsciiArtCreator.Wpf.Framework
 
         private void intUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            
+            if (fontComboBox.SelectedItem == null)
+                return;
 
             FormattedText formattedText = new FormattedText(
                             "A",
@@ -116,9 +117,8 @@ namespace AsciiArtCreator.Wpf.Framework
                             new NumberSubstitution(),
                             1);
 
-            var a = formattedText.Width * viewModel.AsciiArtData.Width;
-            var b = formattedText.Height * viewModel.AsciiArtData.Height;
-
+            document.PageWidth = formattedText.Width * viewModel.AsciiArtData.Width + 50d;
+            document.PageHeight = formattedText.Height * viewModel.AsciiArtData.Height + 50d;
         }
     }
 }

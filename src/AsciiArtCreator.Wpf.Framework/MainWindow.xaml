@@ -203,7 +203,8 @@ ContentStringFormat="{}{0:P}">
                              HorizontalScrollBarVisibility="Visible"
                              VerticalScrollBarVisibility="Visible"
                              IsReadOnly="False">
-                    <FlowDocument PageWidth="100000"
+                    <FlowDocument x:Name="document"
+                        
                                   FontFamily="{Binding ElementName=fontComboBox, 
                         Path=SelectedValue, Mode=OneWay, 
                         UpdateSourceTrigger=PropertyChanged}">
