@@ -214,6 +214,7 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
 
                 imagePath = value;
                 GetImageSize(value);
+                ImageChanged?.Invoke(this, EventArgs.Empty);
                 OnPropertyChanged("ImagePath");
             }
         }
@@ -308,6 +309,8 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public event EventHandler ImageChanged;
 
         public float MinScale
         {

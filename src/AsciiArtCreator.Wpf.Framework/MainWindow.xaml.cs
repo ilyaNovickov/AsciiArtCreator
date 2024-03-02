@@ -51,6 +51,8 @@ namespace AsciiArtCreator.Wpf.Framework
             fontComboBox.ItemsSource = Fonts;
 
             fontComboBox.SelectedIndex = Fonts.IndexOf(new FontFamily("Consolas"));
+
+            intUpDown_ValueChanged(null, null);
         }
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
