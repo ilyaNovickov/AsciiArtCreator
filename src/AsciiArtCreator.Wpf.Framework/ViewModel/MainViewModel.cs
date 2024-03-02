@@ -177,9 +177,7 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         private RelayCommand exportCommand;
         private RelayCommand getArtCommand;
         private RelayCommand stopCommand;
-        //private RelayCommand copyCommand;
-        //private ActionCommand<float> scaleChangeCommand;
-        //private RelayCommand selectFontCommand;
+        private bool isBusy = false;
         private ObservableCollection<GrayscaleArtFormat> artFormats = 
             new ObservableCollection<GrayscaleArtFormat>(StandartAsciiArtMethods.GetBitmapAsciiFormats());
         private float minScale = 0.02f;
@@ -282,8 +280,13 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         {
             get => getArtCommand ?? (getArtCommand = new RelayCommand(async (_) =>
             {
+                if (isBusy)
+                    return;
+
                 if (ImagePath == null)
                     return;
+
+                isBusy = true;
 
                 GrayscaleAsciiArt asciiArt = new GrayscaleAsciiArt(ImagePath);
 
@@ -296,7 +299,7 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
 
                 asciiArt.Dispose();
 
-                return;
+                isBusy = false;
             }));
         }
 

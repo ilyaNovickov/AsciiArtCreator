@@ -41,58 +41,6 @@
             </MenuItem>
             <MenuItem HorizontalContentAlignment="Right" HorizontalAlignment="Right" Header="asd"/>
         </Menu>
-        <!--Строка состояния-->
-        <StatusBar DockPanel.Dock="Bottom">
-            <StatusBar.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </StatusBar.ItemsPanel>
-            <StatusBarItem Grid.Column="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <!--Бегунок для маштаба-->
-                    <Slider Grid.Column="0"
-                        x:Name="slider" 
-    Minimum="0" 
-    Maximum="1" 
-    MinWidth="100" 
-    Value="0.5" 
-    ValueChanged="slider_ValueChanged"
-    TickPlacement="BottomRight">
-                        <behaviors:Interaction.Triggers>
-                            <behaviors:EventTrigger EventName="ValueChanged">
-                                <behaviors:InvokeCommandAction/>
-                            </behaviors:EventTrigger>
-                        </behaviors:Interaction.Triggers>
-                    </Slider>
-                    <!--Конпка для изменения маштаба-->
-                    <toolkit:SplitButton Grid.Column="1"
-Content="{Binding Path=Scale}"
-ContentStringFormat="{}{0:P}">
-                        <toolkit:SplitButton.DropDownContent>
-                            <StackPanel>
-                                <Button Content="2%" Click="Button_Click"/>
-                                <Button Content="50%" Click="Button_Click"/>
-                                <Button Content="100%" Click="Button_Click"/>
-                                <Button Content="500%" Click="Button_Click"/>
-                                <Button Content="1000%" Click="Button_Click"/>
-                            </StackPanel>
-                        </toolkit:SplitButton.DropDownContent>
-                    </toolkit:SplitButton>
-                </Grid>
-                
-            </StatusBarItem>
-            
-        </StatusBar>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -188,26 +136,94 @@ ContentStringFormat="{}{0:P}">
                                          IsChecked="{Binding SaveProportions}"/>
                     </Fluent:RibbonGroupBox>
                 </Fluent:RibbonTabItem>
-                
-            </Fluent:Ribbon>
 
+            </Fluent:Ribbon>
             <!--Основная панель-->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-
                 <!--Изображение-->
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" Background="Gray" Grid.Column="0">
+                <DockPanel Grid.Column="0" x:Name="imagePanel">
+                    <!--Строка состояния-->
+                    <StatusBar DockPanel.Dock="Bottom">
+                        <StatusBar.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                </Grid>
+                            </ItemsPanelTemplate>
+                        </StatusBar.ItemsPanel>
+                        <StatusBarItem Grid.Column="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <!--Бегунок для маштаба-->
+                                <Slider Grid.Column="0"
+                        x:Name="slider" 
+    Minimum="0" 
+    Maximum="1" 
+    MinWidth="100" 
+    Value="0.5" 
+    ValueChanged="slider_ValueChanged"
+    TickPlacement="BottomRight">
+                                    <behaviors:Interaction.Triggers>
+                                        <behaviors:EventTrigger EventName="ValueChanged">
+                                            <behaviors:InvokeCommandAction/>
+                                        </behaviors:EventTrigger>
+                                    </behaviors:Interaction.Triggers>
+                                </Slider>
+                                <!--Конпка для изменения маштаба-->
+                                <toolkit:SplitButton Grid.Column="1"
+Content="{Binding Path=Scale}"
+ContentStringFormat="{}{0:P}">
+                                    <toolkit:SplitButton.DropDownContent>
+                                        <StackPanel>
+                                            <Button Content="2%" Click="Button_Click"/>
+                                            <Button Content="50%" Click="Button_Click"/>
+                                            <Button Content="100%" Click="Button_Click"/>
+                                            <Button Content="500%" Click="Button_Click"/>
+                                            <Button Content="1000%" Click="Button_Click"/>
+                                        </StackPanel>
+                                    </toolkit:SplitButton.DropDownContent>
+                                </toolkit:SplitButton>
+                            </Grid>
+
+                        </StatusBarItem>
+
+                    </StatusBar>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" Background="Gray" >
                     <Image x:Name="image" Stretch="None" Source="{Binding ImagePath, TargetNullValue={StaticResource DefaultImage}}" Grid.Column="0">
                         <Image.LayoutTransform>
                             <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}"/>
                         </Image.LayoutTransform>
                     </Image>
                 </ScrollViewer>
+                </DockPanel>
                 <!--Текстовый блок-->
-                <toolkit:RichTextBox x:Name="richTextBox"
+                <DockPanel Grid.Column="1">
+                    <StatusBar DockPanel.Dock="Bottom">
+                        <StatusBar.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                </Grid>
+                            </ItemsPanelTemplate>
+                        </StatusBar.ItemsPanel>
+                        <StatusBarItem Grid.Column="1">
+                            <ProgressBar x:Name="progresBar" Height="20" Width="150" Minimum="0" Maximum="100" Value="50"/>
+                        </StatusBarItem>
+                    </StatusBar>
+                    <toolkit:RichTextBox x:Name="richTextBox"
                                 Grid.Column="1"
                                      Focusable="True"
                                      Background="Black"
@@ -225,6 +241,7 @@ ContentStringFormat="{}{0:P}">
                         </Paragraph>
                     </FlowDocument>
                 </toolkit:RichTextBox>
+                </DockPanel>
             </Grid>
         </Grid>
     </DockPanel>
