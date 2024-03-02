@@ -109,18 +109,7 @@ namespace AsciiArtCreator.Wpf.Framework
             if (fontComboBox.SelectedItem == null)
                 return;
 
-            FormattedText formattedText = new FormattedText(
-                            "A",
-                            CultureInfo.CurrentCulture,
-                            FlowDirection.LeftToRight,
-                            ((FontFamily)fontComboBox.SelectedItem).GetTypefaces().First(),
-                            intUpDown.Value.Value,
-                            Brushes.Black,
-                            new NumberSubstitution(),
-                            1);
-
-            document.PageWidth = formattedText.Width * viewModel.AsciiArtData.Width + 50d;
-            document.PageHeight = formattedText.Height * viewModel.AsciiArtData.Height + 50d;
+            SetDocumentSize();
         }
 
         private void ToggleButton_Click(object sender, RoutedEventArgs e)
@@ -147,6 +136,11 @@ namespace AsciiArtCreator.Wpf.Framework
             if (fontComboBox.SelectedItem == null)
                 return;
 
+            SetDocumentSize();
+        }
+
+        private void SetDocumentSize()
+        {
             FormattedText formattedText = new FormattedText(
                             "A",
                             CultureInfo.CurrentCulture,
