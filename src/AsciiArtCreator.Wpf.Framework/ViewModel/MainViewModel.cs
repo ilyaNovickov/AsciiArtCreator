@@ -184,6 +184,7 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         private float minScale = 0.02f;
         private float maxScale = 10.0f;
         private float scale = 1f;
+        private bool isColorful = false;
         private ArtData artData = new ArtData();
 
         public ArtData AsciiArtData
@@ -378,6 +379,15 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
             }
         }
 
+        public bool IsColorful
+        {
+            get => isColorful;
+            set
+            {
+                isColorful = value;
+                OnPropertyChanged("IsColorful");
+            }
+        }
 
 
         public void OnPropertyChanged([CallerMemberName] string prop = "")

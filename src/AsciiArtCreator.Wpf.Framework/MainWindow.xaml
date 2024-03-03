@@ -114,12 +114,16 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">
-                                <Label Content="Форматы" VerticalAlignment="Center"/>
-                                <Fluent:ComboBox x:Name="formatsComboBox" MinWidth="100"
+                            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Label Content="Форматы" VerticalAlignment="Center"/>
+                                    <Fluent:ComboBox x:Name="formatsComboBox" MinWidth="100"
                                          ItemsSource="{Binding ArtFormats}" 
                                          SelectedIndex="0"
-                                         DisplayMemberPath="Name"/>
+                                         DisplayMemberPath="Name"
+                                                 IsReadOnly="True"/>
+                                </StackPanel>
+                                <Fluent:CheckBox Header="Цветное изображение" IsChecked="{Binding IsColorful}"/>
                             </StackPanel>
                             <Grid Grid.Column="1" Grid.Row="0">
                                 <Grid.ColumnDefinitions>
@@ -254,7 +258,7 @@ ContentStringFormat="{}{0:P}">
                                      Foreground="White"
                              HorizontalScrollBarVisibility="Visible"
                              VerticalScrollBarVisibility="Visible"
-                             IsReadOnly="False">
+                             IsReadOnly="True">
                     <FlowDocument x:Name="document"
                                     FontStretch="{Binding ElementName=weightCB, Path=SelectedItem}"
                                   FontFamily="{Binding ElementName=fontComboBox, 
