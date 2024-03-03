@@ -202,8 +202,10 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Label Content="Набор симболов"  Grid.Row="0" Grid.Column="0"/>
-                            <Fluent:TextBox Grid.Column="1" Grid.Row="0" MinWidth="100" MaxWidth="100"/>
-                            <Button Content="Добавить"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
+                            <Fluent:TextBox x:Name="formatTextBox" Grid.Column="1" Grid.Row="0" MinWidth="100" MaxWidth="100"/>
+                            <Button Content="Добавить" Command="{Binding AddFormatCommand}" 
+                                    CommandParameter="{Binding ElementName=formatTextBox, Path=Text}"
+                                    Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,5,5,5"/>
                         </Grid>
                     </Fluent:RibbonGroupBox>
                 </Fluent:RibbonTabItem>

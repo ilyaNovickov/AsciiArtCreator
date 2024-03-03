@@ -178,6 +178,7 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         private RelayCommand exportCommand;
         private RelayCommand getArtCommand;
         private RelayCommand stopCommand;
+        private RelayCommand addFormatCommand;
         private bool isBusy = false;
         private ObservableCollection<GrayscaleArtFormat> artFormats = 
             new ObservableCollection<GrayscaleArtFormat>(StandartAsciiArtMethods.GetBitmapAsciiFormats());
@@ -316,6 +317,36 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
             get => stopCommand ?? (stopCommand = new RelayCommand((_) =>
             {
                 cancellationTokenSource?.Cancel();
+            }));
+        }
+
+        public RelayCommand AddFormatCommand
+        {
+            get => addFormatCommand ?? (addFormatCommand = new RelayCommand((value) =>
+            {
+                if (!(value is string))
+                    return;
+
+                List<char> chars = new List<char>();
+
+                string[] inputStrings = ((string)value).Split(new string[] { ", ", ",", " " }, StringSplitOptions.RemoveEmptyEntries);
+                
+                foreach (string item in inputStrings)
+                {
+                    if (item.Length > 1 && inputStrings.Count() != 1)
+                        return;
+
+                    if (inputStrings.Count() == 1)
+                    {
+                        chars.AddRange(item.ToCharArray());
+                        break;
+                    }
+
+                    chars.Add(item.ToCharArray().First());
+                }
+
+                this.artFormats.Add(new GrayscaleArtFormat($"UserFormat{artFormats.Count}", chars,StandartAsciiArtMethods.BitmapStandartMethod));
+
             }));
         }
 
