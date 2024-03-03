@@ -214,6 +214,8 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
 
                 imagePath = value;
                 GetImageSize(value);
+                if (artData.SaveProportions)
+                    artData.UpdateSize();
                 ImageChanged?.Invoke(this, EventArgs.Empty);
                 OnPropertyChanged("ImagePath");
             }
