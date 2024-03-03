@@ -184,11 +184,14 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Label Content="Яркость" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"/>
-                            <toolkit:DoubleUpDown Grid.Column="1" Grid.Row="0"/>
+                            <toolkit:DoubleUpDown DataContext="{Binding AsciiArtData}" Value="{Binding Brightness}"
+                                                  Minimum="-1" Maximum="1" Increment=".1" Grid.Column="1" Grid.Row="0" MaxWidth="75"/>
                             <Label Content="Контрастность" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"/>
-                            <toolkit:DoubleUpDown Grid.Column="1" Grid.Row="1"/>
+                            <toolkit:DoubleUpDown Grid.Column="1" Grid.Row="1" DataContext="{Binding AsciiArtData}" Value="{Binding Contrast}"
+                                                  Minimum="-1" Maximum="2" Increment=".1" MaxWidth="75"/>
                             <Label Content="Насыщенность" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
-                            <toolkit:DoubleUpDown Grid.Column="1" Grid.Row="2"/>
+                            <toolkit:DoubleUpDown Grid.Column="1" Grid.Row="2" DataContext="{Binding AsciiArtData}" Value="{Binding Saturation}"
+                                                  Minimum="-1" Maximum="2" Increment=".1" MaxWidth="75"/>
                         </Grid>
                     </Fluent:RibbonGroupBox>
                     <Fluent:RibbonGroupBox Header="Ноывй формат ASCII">

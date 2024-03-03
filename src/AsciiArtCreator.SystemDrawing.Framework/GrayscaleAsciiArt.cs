@@ -32,6 +32,31 @@ namespace AsciiArtCreator.SystemDrawing.Framework
             private int minHeight;
             private int maxWidth;
             private int maxHeight;
+            private float brightness;
+            private float contrast;
+            private float saturation;
+
+            public float Brightness
+            {
+                get => brightness;
+                set
+                {
+                    if (value < -1f || value > 1f)
+                        return;
+
+                    brightness = value;
+                }
+            }
+            public float Contrast
+            {
+                get => contrast;
+                set => contrast = value;
+            }
+            public float Saturation
+            {
+                get => saturation;
+                set => saturation = value;
+            }
 
             public int MinWidth
             {

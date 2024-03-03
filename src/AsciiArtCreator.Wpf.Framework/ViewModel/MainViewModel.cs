@@ -32,6 +32,40 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
             private int minHeight = 4;
             private int maxWidth = 5000;
             private int maxHeight = 5000;
+            private float brightness = 0f;
+            private float contrast = 1f;
+            private float saturation = 1f;
+
+            public float Brightness
+            {
+                get => brightness;
+                set
+                {
+                    if (value < -1f || value > 1f)
+                        return;
+
+                    brightness = value;
+                    OnPropertyChanged("Brightness");
+                }
+            }
+            public float Contrast
+            {
+                get => contrast;
+                set
+                {
+                    contrast = value;
+                    OnPropertyChanged("Contrast");
+                }
+            }
+            public float Saturation
+            {
+                get => saturation;
+                set 
+                { 
+                    saturation = value; 
+                    OnPropertyChanged("Contrast");
+                }
+            }
 
             public float ProportionValueWH
             {
@@ -250,6 +284,27 @@ namespace AsciiArtCreator.Wpf.Framework.ViewModel
         {
             get => exportCommand ?? (exportCommand = new RelayCommand((_) =>
             {
+                Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog();
+
+                sfd.Filter = "PNG files (*.png)|*.png|JPEG files (*.jpeg)|*.jpeg|BMP files (*.bmp)|*.bmp";
+
+                bool? res = sfd.ShowDialog();
+
+                if (res.HasValue && res.Value)
+                {
+                    GrayscaleAsciiArt asciiArt = new GrayscaleAsciiArt(ImagePath);
+
+                    asciiArt.Format = (GrayscaleArtFormat)_;
+                    asciiArt.ImageOptions.Brightness = artData.Brightness;
+
+                    asciiArt.ImageOptions.Height = artData.Height;
+                    asciiArt.ImageOptions.Width = artData.Width;
+
+                    asciiArt.Export(sfd.FileName);
+
+                    asciiArt.Dispose();
+                }
+
                 return;
             }));
         }
