@@ -7,12 +7,14 @@
         xmlns:Fluent="urn:fluent-ribbon"
         xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:helpers="clr-namespace:AsciiArtCreator.Wpf.Framework.Helpers"
         xmlns:s="clr-namespace:System;assembly=System"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Loaded="Window_Loaded">
     <Window.Resources>
         <BitmapImage x:Key="DefaultImage" UriSource="Assests/nonImage.png"/>
+        <helpers:ColorConverter x:Key="colorConverter"/>
     </Window.Resources>
     <DockPanel>
         <!--Меню-->
@@ -164,9 +166,9 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Label Content="Фон" Grid.Row="0" Grid.Column="0"/>
-                            <toolkit:ColorPicker Grid.Row="0" Grid.Column="1" SelectedColor="{Binding ElementName=richTextBox, Path=Background}"/>
+                            <toolkit:ColorPicker Grid.Row="0" Grid.Column="1" SelectedColor="{Binding ElementName=richTextBox, Path=Background, Converter={StaticResource colorConverter}}"/>
                             <Label Content="Текст" Grid.Row="1" Grid.Column="0"/>
-                            <toolkit:ColorPicker Grid.Row="1" Grid.Column="1" SelectedColor="{Binding ElementName=richTextBox, Path=Foreground}"/>
+                            <toolkit:ColorPicker Grid.Row="1" Grid.Column="1" SelectedColor="{Binding ElementName=richTextBox, Path=Foreground, Converter={StaticResource colorConverter}}"/>
                         </Grid>
                     </Fluent:RibbonGroupBox>
                 </Fluent:RibbonTabItem>

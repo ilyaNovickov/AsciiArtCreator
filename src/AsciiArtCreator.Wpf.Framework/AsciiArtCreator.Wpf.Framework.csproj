@@ -87,6 +87,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\ActionCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Helpers\ColorConverter.cs" />
     <Compile Include="Helpers\FontHelper.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
