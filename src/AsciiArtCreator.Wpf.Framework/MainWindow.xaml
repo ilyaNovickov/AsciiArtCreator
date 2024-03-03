@@ -151,7 +151,25 @@
                         </Grid>
                     </Fluent:RibbonGroupBox>
                 </Fluent:RibbonTabItem>
-
+                <!--Настройки цвета и формата-->
+                <Fluent:RibbonTabItem Header="Настройки">
+                    <Fluent:RibbonGroupBox Header="Цвета текста">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Фон" Grid.Row="0" Grid.Column="0"/>
+                            <toolkit:ColorPicker Grid.Row="0" Grid.Column="1" SelectedColor="{Binding ElementName=richTextBox, Path=Background}"/>
+                            <Label Content="Текст" Grid.Row="1" Grid.Column="0"/>
+                            <toolkit:ColorPicker Grid.Row="1" Grid.Column="1" SelectedColor="{Binding ElementName=richTextBox, Path=Foreground}"/>
+                        </Grid>
+                    </Fluent:RibbonGroupBox>
+                </Fluent:RibbonTabItem>
             </Fluent:Ribbon>
             <!--Основная панель-->
             <Grid Grid.Row="1">
